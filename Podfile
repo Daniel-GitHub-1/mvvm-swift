@@ -11,14 +11,22 @@ target 'MVVMSwift' do
   use_frameworks!
 
   # Pods for MVVMSwift
+
   # add the Firebase pod for Google Analytics
   pod 'Firebase/Analytics'
   pod 'Firebase/Messaging'
+
+  # Network
   pod 'Alamofire', '~> 5.2'
+
+  # RxSwift
   pod 'RxSwift'
   pod 'RxCocoa'
   pod 'RxRelay'
   pod 'RxOptional'
   pod 'RxViewController'
+
+  # Database
+  pod 'RealmSwift'
 
 end

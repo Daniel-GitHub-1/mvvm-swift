@@ -1,0 +1,103 @@
+//
+//  CoreDataViewModel.swift
+//  MVVMSwift
+//
+//  Created by crecolto on 2021/02/15.
+//
+
+import Foundation
+
+/**
+ * CoreDataViewModel.swift
+ *
+ * @description 코어 데이터 뷰 모델
+ * @author Daniel
+ * @Constructor ZwooSoft
+ * @version 1.0.0
+ * @since 02/16/21 10:52 AM
+ * @copyright Copyright © 2021 ZwooSoft All rights reserved.
+ **/
+class CoreDataViewModel {
+    var TAG = "[CoreDataViewModel]" // 디버그 태그
+    
+    /**
+     * 사용자 리스트
+     *
+     * @return onResult (Bool, [Users])
+     */
+    func getAllUsers(onResult: @escaping (Bool, [Users]) -> ()) {
+        let users: [Users] = CoreDataManager.sharedInstance.getUsers()
+        onResult(true, users)
+    }
+    
+    /**
+     * 사용자 추가
+     *
+     * @param dictionary NSDictionary
+     * @return onResult (Bool, String)
+     */
+    func setUser(_ dictionary: [String : Any],
+                 onResult: @escaping (Bool, String) -> ()) {
+        
+        CoreDataManager.sharedInstance.setUser(id: Int64(getAutoIncremenet()),
+                                               name: dictionary[Key.NAME] as? String ?? "",
+                                               email: dictionary[Key.EMAIL] as? String ?? "",
+                                               hp: dictionary[Key.HP] as? String ?? "",
+                                               devices: dictionary[Key.DEVICES] as? [String] ?? []) { (success) in
+            print("\(self.TAG) setUser() >> success: \((success))")
+            
+            onResult(success, "")
+        }
+    }
+    
+    /**
+     * 사용자 삭제
+     *
+     * @param id 아이디
+     * @return onResult (Bool, String)
+     */
+    func deleteUser(_ id: Int64,
+                    onResult: @escaping (Bool, String) -> ()) {
+        CoreDataManager.sharedInstance.deleteUser(id: id) { success in
+            print("\(self.TAG) deleteUser() >> success: \((success))")
+            
+            onResult(success, "")
+        }
+    }
+    
+    /**
+     * 자동 증가값
+     *
+     * @return index Int
+     */
+    func getAutoIncremenet() -> Int {
+        return CoreDataManager.sharedInstance.getAutoIncremenet()
+    }
+    
+    /**
+     * 랜덤 휴대 전화번호
+     * (010XXXXXXXX)
+     *
+     * @return hp Int
+     */
+    func getRandomHpNumber() -> String {
+        var hp = "010"
+        for _ in 0 ..< 8 {
+            let randomNo: UInt32 = arc4random_uniform(10)
+            hp = ("\(hp)\(randomNo)")
+        }
+        return hp
+    }
+    
+    /**
+     * 랜덤 이름
+     * (xxxx)
+     *
+     * @return name String
+     */
+    func getRandomName() -> String {
+//      let letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+        let letters = "abcdefghijklmnopqrstuvwxyz"
+      return String((0..<4).map{ _ in letters.randomElement()! })
+    }
+}

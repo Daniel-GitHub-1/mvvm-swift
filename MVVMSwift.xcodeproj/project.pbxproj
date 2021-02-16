@@ -7,15 +7,34 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		73472FA425DA2A6400F73E7A /* CoreDataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73472FA325DA2A6400F73E7A /* CoreDataViewController.swift */; };
+		73472FEE25DA3BC900F73E7A /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73472FEA25DA3BC900F73E7A /* CoreDataManager.swift */; };
+		7347313925DA558600F73E7A /* CoreDataViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7347313825DA558600F73E7A /* CoreDataViewModel.swift */; };
+		7347314225DA6CCE00F73E7A /* CoreDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7347314025DA6CCE00F73E7A /* CoreDataModel.xcdatamodeld */; };
+		7347316325DA70AF00F73E7A /* DateRealm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7347316225DA70AF00F73E7A /* DateRealm.swift */; };
+		7347316B25DA711200F73E7A /* RealmViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7347316A25DA711200F73E7A /* RealmViewModel.swift */; };
+		7347317025DA743500F73E7A /* RealmViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7347316F25DA743500F73E7A /* RealmViewController.swift */; };
 		736236D125C8E9B0000C9E6C /* CheckIdRemoteDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 736236D025C8E9B0000C9E6C /* CheckIdRemoteDataSource.swift */; };
 		736236D925C8EA1A000C9E6C /* Enum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 736236D825C8EA1A000C9E6C /* Enum.swift */; };
 		736236DE25C8EB3E000C9E6C /* DefaultEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 736236DD25C8EB3E000C9E6C /* DefaultEntity.swift */; };
 		736236E625C8ECE2000C9E6C /* CheckIdRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 736236E525C8ECE2000C9E6C /* CheckIdRepository.swift */; };
+		7362373625C92D90000C9E6C /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7362373525C92D90000C9E6C /* Reachability.swift */; };
+		7362373B25C92DB9000C9E6C /* ColorUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7362373A25C92DB9000C9E6C /* ColorUtil.swift */; };
+		7362374025C92DF0000C9E6C /* DialogUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7362373F25C92DF0000C9E6C /* DialogUtil.swift */; };
+		7362374525C9348F000C9E6C /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7362374425C9348F000C9E6C /* WebViewController.swift */; };
+		7362374A25C9355A000C9E6C /* WebViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7362374925C9355A000C9E6C /* WebViewModel.swift */; };
+		7362374F25C9394E000C9E6C /* Intro.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7362374E25C9394E000C9E6C /* Intro.storyboard */; };
+		7362375725C93984000C9E6C /* IntroViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7362375625C93984000C9E6C /* IntroViewController.swift */; };
+		7362375C25C939E5000C9E6C /* IntroViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7362375B25C939E5000C9E6C /* IntroViewModel.swift */; };
+		7362377F25C94861000C9E6C /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7362377E25C94861000C9E6C /* SettingsViewController.swift */; };
+		738195A025D278E40004A11E /* LogUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7381959F25D278E40004A11E /* LogUtil.swift */; };
+		738195A925D279700004A11E /* sample.html in Resources */ = {isa = PBXBuildFile; fileRef = 738195A825D279700004A11E /* sample.html */; };
+		739EB70725CCEF0F00D3E455 /* ListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 739EB70625CCEF0F00D3E455 /* ListViewModel.swift */; };
+		739EB70C25CD00DC00D3E455 /* ListDataInfoEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 739EB70B25CD00DC00D3E455 /* ListDataInfoEntity.swift */; };
 		73C93DA225C7EB5D0041ADF8 /* Key.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C93DA125C7EB5D0041ADF8 /* Key.swift */; };
 		73E118CB25C28E8700F9F3B2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E118CA25C28E8700F9F3B2 /* AppDelegate.swift */; };
 		73E118CF25C28E8700F9F3B2 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E118CE25C28E8700F9F3B2 /* MainViewController.swift */; };
 		73E118D225C28E8700F9F3B2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 73E118D025C28E8700F9F3B2 /* Main.storyboard */; };
-		73E118D525C28E8700F9F3B2 /* MVVMSwift.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 73E118D325C28E8700F9F3B2 /* MVVMSwift.xcdatamodeld */; };
 		73E118D725C28E8A00F9F3B2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 73E118D625C28E8A00F9F3B2 /* Assets.xcassets */; };
 		73E118DA25C28E8A00F9F3B2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 73E118D825C28E8A00F9F3B2 /* LaunchScreen.storyboard */; };
 		73E118E525C28E8A00F9F3B2 /* MVVMSwiftTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E118E425C28E8A00F9F3B2 /* MVVMSwiftTests.swift */; };
@@ -52,16 +71,37 @@
 /* Begin PBXFileReference section */
 		228F209BC1898475D4AE1BCC /* Pods_MVVMSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MVVMSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4AF348D34F5F51C80C704FD1 /* Pods-MVVMSwift.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MVVMSwift.release.xcconfig"; path = "Target Support Files/Pods-MVVMSwift/Pods-MVVMSwift.release.xcconfig"; sourceTree = "<group>"; };
+		73472FA325DA2A6400F73E7A /* CoreDataViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataViewController.swift; sourceTree = "<group>"; };
+		73472FEA25DA3BC900F73E7A /* CoreDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
+		7347311125DA443C00F73E7A /* Users+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Users+CoreDataClass.swift"; sourceTree = "<group>"; };
+		7347311225DA443C00F73E7A /* Users+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Users+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		7347313825DA558600F73E7A /* CoreDataViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataViewModel.swift; sourceTree = "<group>"; };
+		7347314125DA6CCE00F73E7A /* CoreDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CoreDataModel.xcdatamodel; sourceTree = "<group>"; };
+		7347316225DA70AF00F73E7A /* DateRealm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateRealm.swift; sourceTree = "<group>"; };
+		7347316A25DA711200F73E7A /* RealmViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmViewModel.swift; sourceTree = "<group>"; };
+		7347316F25DA743500F73E7A /* RealmViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmViewController.swift; sourceTree = "<group>"; };
 		736236D025C8E9B0000C9E6C /* CheckIdRemoteDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckIdRemoteDataSource.swift; sourceTree = "<group>"; };
 		736236D825C8EA1A000C9E6C /* Enum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enum.swift; sourceTree = "<group>"; };
 		736236DD25C8EB3E000C9E6C /* DefaultEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultEntity.swift; sourceTree = "<group>"; };
 		736236E525C8ECE2000C9E6C /* CheckIdRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckIdRepository.swift; sourceTree = "<group>"; };
+		7362373525C92D90000C9E6C /* Reachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
+		7362373A25C92DB9000C9E6C /* ColorUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorUtil.swift; sourceTree = "<group>"; };
+		7362373F25C92DF0000C9E6C /* DialogUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DialogUtil.swift; sourceTree = "<group>"; };
+		7362374425C9348F000C9E6C /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
+		7362374925C9355A000C9E6C /* WebViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewModel.swift; sourceTree = "<group>"; };
+		7362374E25C9394E000C9E6C /* Intro.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Intro.storyboard; sourceTree = "<group>"; };
+		7362375625C93984000C9E6C /* IntroViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroViewController.swift; sourceTree = "<group>"; };
+		7362375B25C939E5000C9E6C /* IntroViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroViewModel.swift; sourceTree = "<group>"; };
+		7362377E25C94861000C9E6C /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		7381959F25D278E40004A11E /* LogUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogUtil.swift; sourceTree = "<group>"; };
+		738195A825D279700004A11E /* sample.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = sample.html; sourceTree = "<group>"; };
+		739EB70625CCEF0F00D3E455 /* ListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewModel.swift; sourceTree = "<group>"; };
+		739EB70B25CD00DC00D3E455 /* ListDataInfoEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListDataInfoEntity.swift; sourceTree = "<group>"; };
 		73C93DA125C7EB5D0041ADF8 /* Key.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Key.swift; sourceTree = "<group>"; };
 		73E118C725C28E8700F9F3B2 /* MVVMSwift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MVVMSwift.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		73E118CA25C28E8700F9F3B2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		73E118CE25C28E8700F9F3B2 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		73E118D125C28E8700F9F3B2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		73E118D425C28E8700F9F3B2 /* MVVMSwift.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MVVMSwift.xcdatamodel; sourceTree = "<group>"; };
 		73E118D625C28E8A00F9F3B2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		73E118D925C28E8A00F9F3B2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		73E118DB25C28E8A00F9F3B2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -109,6 +149,33 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		73472F9A25DA223400F73E7A /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				7347314025DA6CCE00F73E7A /* CoreDataModel.xcdatamodeld */,
+				7347311125DA443C00F73E7A /* Users+CoreDataClass.swift */,
+				7347311225DA443C00F73E7A /* Users+CoreDataProperties.swift */,
+				73472FEA25DA3BC900F73E7A /* CoreDataManager.swift */,
+			);
+			path = CoreData;
+			sourceTree = "<group>";
+		};
+		7347315E25DA709100F73E7A /* Realm */ = {
+			isa = PBXGroup;
+			children = (
+				7347316225DA70AF00F73E7A /* DateRealm.swift */,
+			);
+			path = Realm;
+			sourceTree = "<group>";
+		};
+		738195A725D279580004A11E /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				738195A825D279700004A11E /* sample.html */,
+			);
+			path = Assets;
+			sourceTree = "<group>";
+		};
 		73E118BE25C28E8700F9F3B2 = {
 			isa = PBXGroup;
 			children = (
@@ -136,9 +203,9 @@
 			children = (
 				73E1190325C28EA200F9F3B2 /* Classes */,
 				73E1190925C28EEF00F9F3B2 /* Storyboard */,
+				738195A725D279580004A11E /* Assets */,
 				73E118D625C28E8A00F9F3B2 /* Assets.xcassets */,
 				73E118DB25C28E8A00F9F3B2 /* Info.plist */,
-				73E118D325C28E8700F9F3B2 /* MVVMSwift.xcdatamodeld */,
 			);
 			path = MVVMSwift;
 			sourceTree = "<group>";
@@ -187,6 +254,10 @@
 		73E1190525C28EB300F9F3B2 /* Util */ = {
 			isa = PBXGroup;
 			children = (
+				7362373525C92D90000C9E6C /* Reachability.swift */,
+				7362373A25C92DB9000C9E6C /* ColorUtil.swift */,
+				7362373F25C92DF0000C9E6C /* DialogUtil.swift */,
+				7381959F25D278E40004A11E /* LogUtil.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -195,7 +266,12 @@
 			isa = PBXGroup;
 			children = (
 				73E1190E25C28FDF00F9F3B2 /* BaseViewController.swift */,
+				7362375625C93984000C9E6C /* IntroViewController.swift */,
 				73E118CE25C28E8700F9F3B2 /* MainViewController.swift */,
+				7362374425C9348F000C9E6C /* WebViewController.swift */,
+				7362377E25C94861000C9E6C /* SettingsViewController.swift */,
+				73472FA325DA2A6400F73E7A /* CoreDataViewController.swift */,
+				7347316F25DA743500F73E7A /* RealmViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -203,7 +279,12 @@
 		73E1190725C28ECB00F9F3B2 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				7362375B25C939E5000C9E6C /* IntroViewModel.swift */,
 				73E1193E25C291B000F9F3B2 /* MainViewModel.swift */,
+				7362374925C9355A000C9E6C /* WebViewModel.swift */,
+				739EB70625CCEF0F00D3E455 /* ListViewModel.swift */,
+				7347313825DA558600F73E7A /* CoreDataViewModel.swift */,
+				7347316A25DA711200F73E7A /* RealmViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -211,9 +292,12 @@
 		73E1190825C28ED300F9F3B2 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				7347315E25DA709100F73E7A /* Realm */,
+				73472F9A25DA223400F73E7A /* CoreData */,
 				736236DD25C8EB3E000C9E6C /* DefaultEntity.swift */,
 				73E119AB25C2A5B600F9F3B2 /* VersionEntity.swift */,
 				73E119E125C2B60700F9F3B2 /* ListDataEntity.swift */,
+				739EB70B25CD00DC00D3E455 /* ListDataInfoEntity.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -221,6 +305,7 @@
 		73E1190925C28EEF00F9F3B2 /* Storyboard */ = {
 			isa = PBXGroup;
 			children = (
+				7362374E25C9394E000C9E6C /* Intro.storyboard */,
 				73E118D025C28E8700F9F3B2 /* Main.storyboard */,
 				73E118D825C28E8A00F9F3B2 /* LaunchScreen.storyboard */,
 			);
@@ -382,6 +467,8 @@
 				73E118DA25C28E8A00F9F3B2 /* LaunchScreen.storyboard in Resources */,
 				73E118D725C28E8A00F9F3B2 /* Assets.xcassets in Resources */,
 				73E118D225C28E8700F9F3B2 /* Main.storyboard in Resources */,
+				738195A925D279700004A11E /* sample.html in Resources */,
+				7362374F25C9394E000C9E6C /* Intro.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -448,20 +535,37 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7362375725C93984000C9E6C /* IntroViewController.swift in Sources */,
 				736236DE25C8EB3E000C9E6C /* DefaultEntity.swift in Sources */,
 				736236E625C8ECE2000C9E6C /* CheckIdRepository.swift in Sources */,
 				73E1193F25C291B000F9F3B2 /* MainViewModel.swift in Sources */,
+				73472FEE25DA3BC900F73E7A /* CoreDataManager.swift in Sources */,
 				73E119C525C2A97100F9F3B2 /* Define.swift in Sources */,
+				7362374525C9348F000C9E6C /* WebViewController.swift in Sources */,
 				73E119E725C2B90B00F9F3B2 /* ListDataRemoteDataSource.swift in Sources */,
+				739EB70C25CD00DC00D3E455 /* ListDataInfoEntity.swift in Sources */,
+				7362375C25C939E5000C9E6C /* IntroViewModel.swift in Sources */,
+				7362377F25C94861000C9E6C /* SettingsViewController.swift in Sources */,
 				73C93DA225C7EB5D0041ADF8 /* Key.swift in Sources */,
+				7362374A25C9355A000C9E6C /* WebViewModel.swift in Sources */,
+				7362373B25C92DB9000C9E6C /* ColorUtil.swift in Sources */,
 				73E118CF25C28E8700F9F3B2 /* MainViewController.swift in Sources */,
 				73E1190F25C28FDF00F9F3B2 /* BaseViewController.swift in Sources */,
 				736236D125C8E9B0000C9E6C /* CheckIdRemoteDataSource.swift in Sources */,
-				73E118D525C28E8700F9F3B2 /* MVVMSwift.xcdatamodeld in Sources */,
 				736236D925C8EA1A000C9E6C /* Enum.swift in Sources */,
 				73E119AC25C2A5B600F9F3B2 /* VersionEntity.swift in Sources */,
+				7362374025C92DF0000C9E6C /* DialogUtil.swift in Sources */,
 				73E119BF25C2A8CF00F9F3B2 /* VersionRemoteDataSource.swift in Sources */,
 				73E119B525C2A6B200F9F3B2 /* VersionRepository.swift in Sources */,
+				7362373625C92D90000C9E6C /* Reachability.swift in Sources */,
+				73472FA425DA2A6400F73E7A /* CoreDataViewController.swift in Sources */,
+				7347313925DA558600F73E7A /* CoreDataViewModel.swift in Sources */,
+				7347316325DA70AF00F73E7A /* DateRealm.swift in Sources */,
+				7347316B25DA711200F73E7A /* RealmViewModel.swift in Sources */,
+				7347314225DA6CCE00F73E7A /* CoreDataModel.xcdatamodeld in Sources */,
+				739EB70725CCEF0F00D3E455 /* ListViewModel.swift in Sources */,
+				738195A025D278E40004A11E /* LogUtil.swift in Sources */,
+				7347317025DA743500F73E7A /* RealmViewController.swift in Sources */,
 				73E118CB25C28E8700F9F3B2 /* AppDelegate.swift in Sources */,
 				73E119E225C2B60700F9F3B2 /* ListDataEntity.swift in Sources */,
 				73E119DD25C2B5EC00F9F3B2 /* ListDataRepository.swift in Sources */,
@@ -570,7 +674,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -625,7 +729,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -795,13 +899,13 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		73E118D325C28E8700F9F3B2 /* MVVMSwift.xcdatamodeld */ = {
+		7347314025DA6CCE00F73E7A /* CoreDataModel.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				73E118D425C28E8700F9F3B2 /* MVVMSwift.xcdatamodel */,
+				7347314125DA6CCE00F73E7A /* CoreDataModel.xcdatamodel */,
 			);
-			currentVersion = 73E118D425C28E8700F9F3B2 /* MVVMSwift.xcdatamodel */;
-			path = MVVMSwift.xcdatamodeld;
+			currentVersion = 7347314125DA6CCE00F73E7A /* CoreDataModel.xcdatamodel */;
+			path = CoreDataModel.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};
