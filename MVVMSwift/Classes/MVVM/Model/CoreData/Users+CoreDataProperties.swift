@@ -2,7 +2,7 @@
 //  Users+CoreDataProperties.swift
 //  MVVMSwift
 //
-//  Created by crecolto on 2021/02/15.
+//  Created by Daniel on 2021/02/15.
 //
 //
 

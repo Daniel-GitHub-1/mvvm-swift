@@ -2,7 +2,7 @@
 //  Key.swift
 //  MVVMSwift
 //
-//  Created by crecolto on 2021/02/01.
+//  Created by Daniel on 2021/02/01.
 //
 
 import Foundation
@@ -20,6 +20,7 @@ import Foundation
 class Key {
     static let RESULT = "result" // 결과
     static let MSG = "msg" // 메시지
+    static let AUTH_TOKEN = "auth_token" // 인증키
 
     static let VERSION = "version" // 버전
     static let MOBILE_TYPE = "mobileType" // 모바일 타입 (I: iOS, A: 안드로이드)
@@ -43,4 +44,10 @@ class Key {
     
     static let TN_ID = "id" // 요청 아이디 타입
     static let TN_LIST = "list" // 요청 리스트 타입
+    
+    static let URL = "url" // URL
+    
+    static let PASSWD = "passwd"
+    static let LOGIN_TYPE = "login_type"
+    static let MODE = "mode"
 }

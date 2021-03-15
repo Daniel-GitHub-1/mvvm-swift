@@ -2,7 +2,7 @@
 //  Reachability.swift
 //  MVVMSwift
 //
-//  Created by crecolto on 2021/02/02.
+//  Created by Daniel on 2021/02/02.
 //
 
 import SystemConfiguration
@@ -44,6 +44,7 @@ public class Reachability {
         }
         
         /* Only Working for WIFI
+         
          let isReachable = flags == .reachable
          let needsConnection = flags == .connectionRequired
          

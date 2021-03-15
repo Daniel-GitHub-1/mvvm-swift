@@ -2,10 +2,11 @@
 //  Define.swift
 //  MVVMSwift
 //
-//  Created by crecolto on 2021/01/28.
+//  Created by Daniel on 2021/01/28.
 //
 
 import Foundation
+import UIKit
 
 /**
  * Define.swift
@@ -18,20 +19,31 @@ import Foundation
  * @copyright Copyright © 2021 ZwooSoft All rights reserved.
  **/
 class Define {
-//    static let BASE_URL = "http://vring.crecolto-devserver.com:3300/"
-    static let BASE_URL = "https://app.ppojji.com/"
+    static let AUTH_TOKEN = "ehdskavkdnjxpr20186315650033dbfldzmssil" // 인증키
     
-    static let APP_TYPE = 1
-
-    static let MENT_ERROR_NETWORK = "네트워크 감도가 약하거나 일시적 장애입니다.\n다시 시도해 주세요."
-
-    static let SB_NAME_MAIN = "Main"
-    static let VC_NAME_MAINVIEW = "MainView"
-    static let VC_NAME_WEBVIEW = "WebView"
-    static let VC_NAME_COREDATAVIEW = "CoreDataView"
-    static let VC_NAME_REALMVIEW = "RealmView"
+    static let APP_TYPE = 1 // 앱 타입
     
-    static let MODEL_NAME: String = "Users"
+    static let AUTH = "auth" // 인증
+
+    static let SB_NAME_LOGIN = "Login" // 로그인 스토리 뷰 명
+    static let SB_NAME_MAIN = "Main" // 메인 스토리 뷰 명
+    
+    static let VC_NAME_LOGINVIEW = "LoginView" // 로그인 뷰 컨트롤러명
+    static let VC_NAME_MAINVIEW = "MainView" // 메인 뷰 컨트롤러명
+    static let VC_NAME_WEBVIEW = "WebView" // 웹 뷰 컨트롤러명
+    static let VC_NAME_COREDATAVIEW = "CoreDataView" // 코어 데이터 뷰 컨트롤러명
+    static let VC_NAME_REALMVIEW = "RealmView" // 렐름 뷰 컨트롤러명
+    static let VC_NAME_SETTINGSVIEW = "SettingsView" // 설정 뷰 컨트롤러명
+    static let VC_NAME_TABLEVIEW = "TableView" // 테이블 뷰 컨트롤러명
+    static let VC_NAME_MESSAGEVIEW = "MessageView" // 메시지 뷰 컨트롤러명
+    static let VC_NAME_CAMERAVIEW = "CameraView" // 카메라 뷰 컨트롤러명
+    
+    static let MODEL_NAME: String = "Users" // 코어 데이터 모델명
+    
+    static let LOADING_VIEW_WIDTH_SIZE = 80.0 // 로딩 뷰 폭
+    static let LOADING_VIEW_HEIGHT_SIZE = 80.0 // 로딩 뷰 높이
+
+    static let LOADING_INTERVAL = 20.0 // 로딩 인터벌
 }
 
 

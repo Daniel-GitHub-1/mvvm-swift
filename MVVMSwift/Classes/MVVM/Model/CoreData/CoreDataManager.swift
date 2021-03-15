@@ -2,7 +2,7 @@
 //  CoreDataManager.swift
 //  MVVMSwift
 //
-//  Created by crecolto on 2021/02/15.
+//  Created by Daniel on 2021/02/15.
 //
 
 import UIKit
@@ -19,12 +19,11 @@ import CoreData
  * @copyright Copyright © 2021 ZwooSoft All rights reserved.
  **/
 class CoreDataManager {
-    let TAG: String = "[CoreDataManager]" // 디버그 태그
+    private let TAG: String = "[CoreDataManager]" // 디버그 태그
     
-    let appDelegate: AppDelegate? = UIApplication.shared.delegate as? AppDelegate // 앱 델리게이트
-    lazy var context = appDelegate?.persistentContainer.viewContext // 컨텍스트
-    let modelName = Define.MODEL_NAME // 모델명
-    
+    private let appDelegate: AppDelegate? = UIApplication.shared.delegate as? AppDelegate // 앱 델리게이트
+    private lazy var context = appDelegate?.persistentContainer.viewContext // 컨텍스트
+    private let modelName = Define.MODEL_NAME // 모델명
     static let sharedInstance = CoreDataManager() // 인스턴스
     
     init() {

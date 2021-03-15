@@ -1,0 +1,37 @@
+/* 
+  Localizable.strings
+  MVVMSwift
+
+  Created by Daniel on 2021/02/18.
+  
+*/
+
+// Common
+"Hello" = "Hello";
+"Confirm" = "Confirm";
+"Cancel" = "Cancel";
+
+// View Name
+"Intro" = "Intro";
+"Main" = "Main";
+"Table" = "Table";
+"Web" = "Web";
+"Settings" = "Settings";
+"CoreData" = "CoreData";
+"Realm" = "Realm";
+
+// Login
+"InputId" = "Please input your ID.";
+"InputPw" = "Please input your Password.";
+
+// SNS
+"SMS" = "SMS";
+"Kakao" = "Kakao";
+"Band" = "Band";
+
+// Camera
+"TakePhoto" = "Take photo";
+"CameraRoll" = "Camera roll";
+"PhotoLibrary" = "Photo library";
+
+

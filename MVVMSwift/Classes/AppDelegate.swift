@@ -2,19 +2,26 @@
 //  AppDelegate.swift
 //  MVVMSwift
 //
-//  Created by crecolto on 2021/01/28.
+//  Created by Daniel on 2021/01/28.
 //
 
 import UIKit
 import CoreData
+import RxKakaoSDKCommon
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
+    
+    let TAG = "[AppDelegate]"   // 디버그 태그
 
     var window: UIWindow?
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        
+        // 카카오톡
+        RxKakaoSDKCommon.initSDK(appKey: Kakao.NATIVE_APP_KEY)
+        
         return true
     }
 
@@ -61,6 +68,31 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
             }
         }
+    }
+    
+    func application(_ app: UIApplication,
+                     open url: URL,
+                     options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
+        
+        // TODO
+//        if (AuthApi.isKakaoTalkLoginUrl(url)) {
+//            return AuthController.handleOpenUrl(url: url)
+//        }
+        
+        return false
+    }
+    
+    /**
+     * 앱 종료
+     *
+     */
+    func finishApp() {
+        print("\(TAG) finishApp() >> Start !!!")
+        
+        UIControl()
+            .sendAction(#selector(URLSessionTask.suspend),
+                        to: UIApplication.shared,
+                        for: nil)
     }
 }
 

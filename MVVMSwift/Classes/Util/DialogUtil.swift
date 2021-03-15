@@ -2,7 +2,7 @@
 //  DialogUtil.swift
 //  MVVMSwift
 //
-//  Created by crecolto on 2021/02/02.
+//  Created by Daniel on 2021/02/02.
 //
 
 import UIKit
@@ -18,9 +18,9 @@ import UIKit
  * @copyright Copyright © 2021 ZwooSoft All rights reserved.
  **/
 class DialogUtil {
-    let TAG: String = "[DialogUtil]"            // 디버그 태그
+    let TAG: String = "[DialogUtil]" // 디버그 태그
     
-    static let sharedInstance = DialogUtil()    // 인스턴스
+    static let sharedInstance = DialogUtil() // 인스턴스
     
     init() {
         print("\(TAG) init() >> Start !!!")
@@ -154,7 +154,7 @@ class DialogUtil {
                      onResult: @escaping (String) -> Void) {
         // 오프라인
         let title = "알림"
-        let message = Define.MENT_ERROR_NETWORK
+        let message = Ment.MENT_ERROR_NETWORK
         var contents = [String]()
         contents.append("확인")
 

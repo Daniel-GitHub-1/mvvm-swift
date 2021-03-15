@@ -2,24 +2,20 @@
 //  CoreDataViewModel.swift
 //  MVVMSwift
 //
-//  Created by crecolto on 2021/02/15.
+//  Created by Daniel on 2021/02/15.
 //
 
-import Foundation
-
-/**
- * CoreDataViewModel.swift
- *
- * @description 코어 데이터 뷰 모델
- * @author Daniel
- * @Constructor ZwooSoft
- * @version 1.0.0
- * @since 02/16/21 10:52 AM
- * @copyright Copyright © 2021 ZwooSoft All rights reserved.
- **/
-class CoreDataViewModel {
-    var TAG = "[CoreDataViewModel]" // 디버그 태그
+class CoreDataViewModel: BaseViewModel {
     
+    /**
+     * 초기화
+     *
+     */
+    override init() {
+        super.init()
+        self.initViewModel("[CoreDataViewModel]")
+    }
+
     /**
      * 사용자 리스트
      *
@@ -44,8 +40,7 @@ class CoreDataViewModel {
                                                email: dictionary[Key.EMAIL] as? String ?? "",
                                                hp: dictionary[Key.HP] as? String ?? "",
                                                devices: dictionary[Key.DEVICES] as? [String] ?? []) { (success) in
-            print("\(self.TAG) setUser() >> success: \((success))")
-            
+            self.d("setUser() >> success: \((success))")
             onResult(success, "")
         }
     }
@@ -59,7 +54,7 @@ class CoreDataViewModel {
     func deleteUser(_ id: Int64,
                     onResult: @escaping (Bool, String) -> ()) {
         CoreDataManager.sharedInstance.deleteUser(id: id) { success in
-            print("\(self.TAG) deleteUser() >> success: \((success))")
+            self.d("deleteUser() >> success: \((success))")
             
             onResult(success, "")
         }

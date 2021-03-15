@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="O7U-7T-ogV">
+            <objects>
+                <viewController id="6sg-el-T1z" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="k1S-5b-uWd">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pj6-yV-9Vl">
+                                <rect key="frame" x="50" y="94" width="314" height="178"/>
+                                <color key="backgroundColor" systemColor="systemYellowColor"/>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="RJ7-gd-GL4"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="RJ7-gd-GL4" firstAttribute="bottom" secondItem="pj6-yV-9Vl" secondAttribute="bottom" constant="590" id="39y-Qv-nI9"/>
+                            <constraint firstItem="pj6-yV-9Vl" firstAttribute="trailing" secondItem="RJ7-gd-GL4" secondAttribute="trailing" constant="-50" id="FJQ-w9-tQ9"/>
+                            <constraint firstItem="pj6-yV-9Vl" firstAttribute="top" secondItem="RJ7-gd-GL4" secondAttribute="top" constant="50" id="NhV-jQ-gzd"/>
+                            <constraint firstItem="pj6-yV-9Vl" firstAttribute="leading" secondItem="RJ7-gd-GL4" secondAttribute="leading" constant="50" id="SmO-iS-HXd"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="XHO-pj-xvN" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="118.84057971014494" y="57.589285714285708"/>
+        </scene>
+    </scenes>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemYellowColor">
+            <color red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
+</document>

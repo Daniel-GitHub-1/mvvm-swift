@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <title>JavaScript Test</title>
-    <style type="text/css">
-        #container {
-            margin-top: 30pt;
-        }
+    <head>
+        <title>JavaScript</title>
+        <style type="text/css">
+            #container {
+                margin-top: 30pt;
+            }
         button {
             background-color: gray;
             border: none;
@@ -13,51 +13,53 @@
             font-size: 20pt;
             width: 100%;
         }
-    </style>
-    <script type="text/javascript">
-        function initNative() {
-            bind()
+        </style>
+        <script type="text/javascript">
+            
+            function actionUser() {
+                var message = {
+                    'action': 'user',
+                    'name': 'daniel',
+                    'email': 'daniel@test.com',
+                    'hp': '01011112222',
+                };
+                window.webkit.messageHandlers.getUser.postMessage(message);
+            }
+        
+        function actionCompany() {
+            var message = {
+                'action': 'company',
+                'name': 'crecolto',
+                'ceo': 'Tonny',
+                'website': 'http://www.crecolto.com',
+            };
+            window.webkit.messageHandlers.getCompany.postMessage(message);
         }
         
-        function bind() {
+        function actionLocation() {
             var message = {
-                'action': 'bind',
-                'name': 'message'
+                'action': 'location',
             };
-            window.webkit.messageHandlers.test.postMessage(message);
+            window.webkit.messageHandlers.getLocation.postMessage(message);
         }
-    
-        function test() {
-            alert('[Web] appCall()\nmessage :\n' + message);
+
+        function getUser() {}
+        
+        function getCompany() {}
+        
+        function getLocation() {}
+        
+        function showPopup(message) {
+            alert('[Native] showPopup() :\n' + message);
         }
-    
-        function getMessage() {
-            window.webkit.messageHandlers.test.postMessage('getMessage');
-        }
-    
-        function returnMessage(text) {
-            alert('[Native] returnMessage() :\n' + text);
-        }
-    
-        function callFunction() {
-            var message = {
-                'action': 'call',
-                'function': 'returnFunction'
-            };
-            window.webkit.messageHandlers.test.postMessage(message);
-        }
-    
-        function returnFunction(text) {
-            alert('(Web)returnFunction() :\n' + text);
-        }
-    </script>
-</head>
-<body>
-    <div id='container' align='center'>
-        <button onclick='bind();'>Call bind()</button></br>
-        <button onclick='test();' style='margin-top: 10px'>Print Binding Data</button></br>
-        <button onclick='getMessage();' style='margin-top: 10px'>Call getMessage()</button></br>
-        <button onclick='callFunction();' style='margin-top: 10px'>Call callFunction()</button></br>
-    </div>
-</body>
+        
+            </script>
+    </head>
+    <body>
+        <div id='container' align='center'>
+            <button onclick='actionUser();'>Call User()</button></br>
+            <button onclick='actionCompany();'>Call Company()</button></br>
+            <button onclick='actionLocation();'>Call Location()</button></br>
+        </div>
+    </body>
 </html>

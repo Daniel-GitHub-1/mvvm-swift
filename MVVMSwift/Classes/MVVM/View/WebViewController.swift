@@ -2,12 +2,17 @@
 //  WebViewController.swift
 //  MVVMSwift
 //
-//  Created by crecolto on 2021/02/02.
+//  Created by Daniel on 2021/02/02.
 //
 
-import Foundation
 import UIKit
 import WebKit
+import SwiftUI
+
+// RxSwift
+import RxCocoa
+import RxSwift
+import RxViewController
 
 protocol WebViewDelegate: NSObjectProtocol {
     
@@ -29,67 +34,26 @@ protocol WebViewDelegate: NSObjectProtocol {
  * @since 02/16/21 10:52 AM
  * @copyright Copyright © 2021 ZwooSoft All rights reserved.
  **/
-class WebViewController: BaseViewController,
-                         ControllerType,
-                         WKUIDelegate,
-                         WKNavigationDelegate,
-                         WKScriptMessageHandler {
-    
-    // MARK: - WKScriptMessageHandler Delegate
-    func userContentController(_ userContentController: WKUserContentController,
-                               didReceive message: WKScriptMessage) {
-//        d("userContentController() >> message: \(message)")
-       
-        d("userContentController() >> name: \(message.name)")
-        
-        if message.name == "test" {
-            if let dictionary: [String: String] = message.body as? Dictionary {
-                if let action = dictionary["action"] {
-                    if action == "bind", let name = dictionary["name"] {
-                        if name == "message" {
-                            let dateString = Date().description
-                            webView.evaluateJavaScript("var \(name) = '\(dateString)';", completionHandler: nil)
-                        }
-                    } else if action == "call", let function = dictionary["function"] {
-                        var returnMessage = ""
-                        if function == "returnFunction" {
-                            returnMessage = "나는 선택받은 function이다."
-                        }
-                        
-                        webView.evaluateJavaScript("\(function)('\(returnMessage)')", completionHandler: nil)
-                    }
-                }
-            } else if let message = message.body as? String {
-                if message == "getMessage" {
-                    webView.evaluateJavaScript("returnMessage('나는 function에 호출된 녀석입니다.');", completionHandler: nil)
-                }
-            }
-        }
-    }
-    
+class WebViewController: BaseViewController {
+
     @IBOutlet var webView: WKWebView! // 웹 뷰
     @IBOutlet var activityIndicator: UIActivityIndicatorView! // 인디게이터 뷰
     
     var delegate: WebViewDelegate? // 델리게이트
     let viewModel = WebViewModel() // 뷰 모델
     
-    var navigationTitle: String { // 네비게이션 타이틀
-        return "[Web]"
-    }
+    @ObservedObject var locationUtil = LocationUtil()
     
     // MARK: - UIViewController Life Cycle
     
     override func loadView() {
         d("loadView() >> Start !!!")
         super.loadView()
-        self.webView.navigationDelegate = self
-        self.webView.uiDelegate = self
         
         let contentController = WKUserContentController()
-        contentController.add(self, name: "test")
-        
-        let userScript = WKUserScript(source: "initNative()", injectionTime: .atDocumentEnd, forMainFrameOnly: true)
-        contentController.addUserScript(userScript)
+        contentController.add(self, name: "getUser")
+        contentController.add(self, name: "getCompany")
+        contentController.add(self, name: "getLocation")
         
         let configuration = WKWebViewConfiguration()
         configuration.userContentController = contentController
@@ -104,11 +68,17 @@ class WebViewController: BaseViewController,
     // MARK: - UIViewController Life Cycle
     
     override func viewDidLoad() {
+        d("viewDidLoad() >> Start !!!")
         super.viewDidLoad()
         
-        // 네비게이션바 설정
-        self.navigationController?.setNavigationBarHidden(false, animated: true)
-        self.navigationItem.title = navigationTitle
+        // 디버그 태그
+        setTag("[\(NSLocalizedString("Web", comment: ""))]")
+        
+        // 네비게이션 타이틀
+        setTitle(NSLocalizedString("Web", comment: ""))
+        
+        // 뒤로가기 버튼
+        self.addBackButton()
         
         HTTPCookieStorage.shared.cookieAcceptPolicy = HTTPCookie.AcceptPolicy.always
         
@@ -117,12 +87,19 @@ class WebViewController: BaseViewController,
         self.activityIndicator.startAnimating()
         self.activityIndicator.hidesWhenStopped = true
 
+        // TODO URL 테스트
+//        let url = Define.getMainUrl(subUrl: "")
+//        d("\(TAG) viewDidLoad Start !!!")
+//
+//        let request = URLRequest(url: URL(string: url)!)
+//        self.webView.load(request as URLRequest)
+        
         guard let localFilePath = Bundle.main.path(forResource: "sample", ofType: "html") else {
-            d("path is nil !!!")
+            d("viewDidLoad() >> path is nil !!!")
             return
         }
-        d("localFilePath: \(localFilePath)")
-        
+        d("viewDidLoad() >> localFilePath: \(localFilePath)")
+
         let url = URL(fileURLWithPath: localFilePath)
         let request = URLRequest(url: url)
         self.webView.load(request as URLRequest)
@@ -133,41 +110,7 @@ class WebViewController: BaseViewController,
 //            d("getVersion() >> msg: \(msg)")
 //        }
     }
-    
-    
-    // MARK: - WKNavigationDelegate
-    
-    func webView(_ webView: WKWebView,
-                 didStartProvisionalNavigation navigation: WKNavigation!) {
-        d("didStartProvisionalNavigation() >> Start !!!")
-        
-        self.activityIndicator.stopAnimating()
-    }
-    
-    func webView(_ webView: WKWebView,
-                 didFinish navigation: WKNavigation!) {
-        d("didFinish() >> url: \(String(describing: webView.url?.absoluteString))")
-        
-        self.activityIndicator.stopAnimating()
-    }
-    
-    internal func webView(_ webView: WKWebView,
-                         didFail navigation: WKNavigation!, withError error: Error)  {
-        d("didFail() >> url: \(String(describing: error))")
-        
-        self.activityIndicator.stopAnimating()
-    }
-    
-    /**
-     *  중복 리로드 방지
-     *
-     * @param webView WKWebView
-     */
-    public func webViewWebContentProcessDidTerminate(_ webView: WKWebView) {
-        webView.reload()
-        d("webViewWebContentProcessDidTerminate() >> Start !!!")
-    }
-    
+
     // MARK: - Function
     
     /**
@@ -230,10 +173,10 @@ class WebViewController: BaseViewController,
         var objectsToShare = [Any?]()
         objectsToShare.append(webView.url?.absoluteString)
         
-        let activityVC = UIActivityViewController(activityItems: objectsToShare as [Any], applicationActivities: nil)
-        activityVC.popoverPresentationController?.sourceView = self.view
+        let vc = UIActivityViewController(activityItems: objectsToShare as [Any], applicationActivities: nil)
+        vc.popoverPresentationController?.sourceView = self.view
         
-        self.present(activityVC, animated: true, completion: nil)
+        self.present(vc, animated: true, completion: nil)
     }
     
     /**
@@ -267,3 +210,149 @@ class WebViewController: BaseViewController,
     }
 }
 
+// MARK: - WKNavigation Delegate
+
+extension WebViewController: WKNavigationDelegate {
+    func webView(_ webView: WKWebView,
+                 didStartProvisionalNavigation navigation: WKNavigation!) {
+        d("didStartProvisionalNavigation() >> Start !!!")
+        
+        self.activityIndicator.stopAnimating()
+    }
+    
+    func webView(_ webView: WKWebView,
+                 didFinish navigation: WKNavigation!) {
+        d("didFinish() >> url: \(String(describing: webView.url?.absoluteString))")
+        
+        self.activityIndicator.stopAnimating()
+    }
+    
+    internal func webView(_ webView: WKWebView,
+                         didFail navigation: WKNavigation!, withError error: Error)  {
+        d("didFail() >> url: \(String(describing: error))")
+        
+        self.activityIndicator.stopAnimating()
+    }
+    
+    /**
+     *  중복 리로드 방지
+     *
+     * @param webView WKWebView
+     */
+    public func webViewWebContentProcessDidTerminate(_ webView: WKWebView) {
+        webView.reload()
+        d("webViewWebContentProcessDidTerminate() >> Start !!!")
+    }
+}
+
+// MARK: - WKUI Delegate
+
+extension WebViewController: WKUIDelegate {
+    func webView(_ webView: WKWebView,
+                 runJavaScriptAlertPanelWithMessage message: String,
+                 initiatedByFrame frame: WKFrameInfo,
+                 completionHandler: @escaping () -> Void) {
+        var contents = [String]()
+        contents.append("Confirm")
+        
+        DialogUtil
+            .sharedInstance
+            .show(controller: self,
+                  title: "Alert",
+                  message: message,
+                  contents: contents) { (content) in
+                completionHandler()
+            }
+    }
+    
+    func webView(_ webView: WKWebView,
+                 runJavaScriptConfirmPanelWithMessage message: String,
+                 initiatedByFrame frame: WKFrameInfo,
+                 completionHandler: @escaping (Bool) -> Void) {
+        
+        var contents = [String]()
+        contents.append("Cancel")
+        contents.append("Confirm")
+        
+        DialogUtil
+            .sharedInstance
+            .show(controller: self,
+                  title: "Alert",
+                  message: message,
+                  contents: contents) { (content) in
+                if (content == "Confirm") {
+                    completionHandler(true)
+                } else {
+                    completionHandler(false)
+                }
+            }
+    }
+}
+
+// MARK: - WKScriptMessageHandler Delegate
+
+extension WebViewController: WKScriptMessageHandler {
+    func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
+        d("userContentController() >> name: \(message.name)")
+        
+        if message.name == "getUser" {
+            if let dictionary: [String: String] = message.body as? Dictionary {
+                if let action = dictionary["action"] {
+                    if action == "user",
+                       let name = dictionary["name"],
+                       let email = dictionary["email"],
+                       let hp = dictionary["hp"] {
+                        d("userContentController() >> name: \(name)")
+                        d("userContentController() >> email: \(email)")
+                        d("userContentController() >> hp: \(hp)")
+                        
+                        let dateString = Date().description
+                        d("userContentController() >> dateString: \(dateString)")
+                        let message = "\(dateString)\n\(name)\n\(email)\n\(hp)"
+                        
+                        let escaped = message.replacingOccurrences(of: "\n", with: "\\n", options: .literal, range: nil)
+                        webView.evaluateJavaScript("showPopup('\(escaped)');", completionHandler: nil)
+                    }
+                }
+            }
+        } else if message.name == "getCompany" {
+            if let dictionary: [String: String] = message.body as? Dictionary {
+                if let action = dictionary["action"] {
+                    if action == "company",
+                       let name = dictionary["name"],
+                       let ceo = dictionary["ceo"],
+                       let website = dictionary["website"] {
+                        
+                        d("userContentController() >> name: \(name)")
+                        d("userContentController() >> ceo: \(ceo)")
+                        d("userContentController() >> website: \(website)")
+                        
+                        let dateString = Date().description
+                        d("userContentController() >> dateString: \(dateString)")
+                        let message = "\(dateString)\n\(name)\n\(ceo)\n\(website)"
+                        let escaped = message.replacingOccurrences(of: "\n", with: "\\n", options: .literal, range: nil)
+                        webView.evaluateJavaScript("showPopup('\(escaped)');", completionHandler: nil)
+                    }
+                }
+            }
+        } else if message.name == "getLocation" {
+            let statusString = locationUtil.statusString
+            d("userContentController() >> statusString: \(String(describing: statusString))")
+            if statusString == "authorizedWhenInUse"
+                || statusString == "authorizedAlways" {
+                
+                let location = locationUtil.lastLocation
+                let latitude = "\(location?.coordinate.latitude ?? 0)"
+                let longitude = "\(location?.coordinate.longitude ?? 0)"
+          
+                d("userContentController() >> latitude: \(latitude)")
+                d("userContentController() >> longitude: \(longitude)")
+                
+                let message = "\(latitude)\n\(longitude)"
+                let escaped = message.replacingOccurrences(of: "\n", with: "\\n", options: .literal, range: nil)
+                
+                webView.evaluateJavaScript("showPopup('\(escaped)');", completionHandler: nil)
+            }
+        }
+    }
+}

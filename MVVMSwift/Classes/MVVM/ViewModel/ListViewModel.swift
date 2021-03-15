@@ -2,48 +2,48 @@
 //  ListViewModel.swift
 //  MVVMSwift
 //
-//  Created by crecolto on 2021/02/05.
+//  Created by Daniel on 2021/02/05.
 //
 
-import Foundation
-import RxSwift
-import RxCocoa
-import Alamofire
+class ListViewModel: BaseViewModel {
 
-/**
- * ListViewModel.swift
- *
- * @description 리스트 뷰 모델
- * @author Daniel
- * @Constructor ZwooSoft
- * @version 1.0.0
- * @since 02/16/21 10:52 AM
- * @copyright Copyright © 2021 ZwooSoft All rights reserved.
- **/
-class ListViewModel {
-    var TAG = "[ListVi‰ewModel]" // 디버그 태그
-    
-    let listDataRepository = ListDataRepository() // 리스트 데이터 저장소
+    private let listDataService = ListDataService() // 리스트 데이터 서비스
     
     /**
-     * 리스트 데이터 중복 체크 정보
-     *
-     * @param view UIViewController
-     * @param parameters 파라미터
-     * @return completion(true|false, ListDataEntity, GetFailureReason)
+     * 초기화
      *
      */
-    func getListData(view: UIViewController,
+    override init() {
+        super.init()
+        self.initViewModel("[ListViewModel]")
+    }
+    
+    /**
+     * 리스트 데이터 요청
+     *
+     * @param viewController UIViewController
+     * @param parameters 파라미터
+     * @return completion(true|false, ListData, GetFailureReason)
+     *
+     */
+    func getListData(_ viewController: UIViewController,
                      parameters: Parameters,
-                     onResult: @escaping (Bool, [ListDataInfoEntity], Enum.GetFailureReason)->()) {
-        print("\(TAG) getListData() >> parameters: \(parameters)")
-
-        listDataRepository.getListData(parameters: parameters) { (success, results, error) in
-            print("\(self.TAG) getListData() >> success: \(success)")
-            print("\(self.TAG) getListData() >> results: \(results)")
-            print("\(self.TAG) getListData() >> error: \(error)")
-            
-            onResult(success, results.info, error)
-        }
+                     onResult: @escaping (Bool, ListData, GetFailureReason) -> ()) {
+        d("getListData() >> parameters: \(parameters)")
+        
+        listDataService
+            .getListData(parameters)
+            .subscribe(
+                onNext: { result in
+                    onResult(true, result, GetFailureReason.NONE)
+                    self.d("getListData() >> result: \(result)")
+                },
+                onError: { error in
+                    onResult(false, ListData.init(),
+                             error as? GetFailureReason ?? GetFailureReason.NONE)
+                    self.d("getListData() >> error: \(error)")
+                }
+            )
+            .disposed(by: self.disposeBag)
     }
 }

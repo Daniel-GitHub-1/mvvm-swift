@@ -1,6 +1,7 @@
 # Uncomment the next line to define a global platform for your project
 
-platform :ios, '10.0'
+#platform :ios, '9.0'
+#platform :ios, '10.0'
 #platform :ios, '11.0'
 #platform :ios, '12.0'
 #platform :ios, '13.0'
@@ -28,5 +29,11 @@ target 'MVVMSwift' do
 
   # Database
   pod 'RealmSwift'
+
+  # MaterialBottomSheet
+  pod 'MaterialComponents/BottomSheet'
+
+  # Kakao SDK
+  pod 'RxKakaoSDK'
 
 end

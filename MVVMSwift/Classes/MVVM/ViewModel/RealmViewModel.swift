@@ -2,24 +2,23 @@
 //  RealmViewModel.swift
 //  MVVMSwift
 //
-//  Created by crecolto on 2021/02/15.
+//  Created by Daniel on 2021/02/15.
 //
 
+// Realm
 import RealmSwift
 
-/**
- * RealmViewModel.swift
- *
- * @description 렐름 뷰 모델
- * @author Daniel
- * @Constructor ZwooSoft
- * @version 1.0.0
- * @since 02/16/21 10:52 AM
- * @copyright Copyright © 2021 ZwooSoft All rights reserved.
- **/
-class RealmViewModel {
-    var TAG = "[RealmViewModel]" // 디버그 태그
-    let realm = try! Realm() // 렐름
+class RealmViewModel: BaseViewModel {
+    private let realm = try! Realm() // 렐름
+    
+    /**
+     * 초기화
+     *
+     */
+    override init() {
+        super.init()
+        self.initViewModel("[RealmViewModel]")
+    }
     
     /**
      * 날짜 저장

@@ -2,10 +2,10 @@
 //  RealmViewController.swift
 //  MVVMSwift
 //
-//  Created by crecolto on 2021/02/15.
+//  Created by Daniel on 2021/02/15.
 //
 
-import Foundation
+import UIKit
 
 /**
  * RealmViewController.swift
@@ -20,16 +20,21 @@ import Foundation
 class RealmViewController: BaseViewController {
 
     var viewModel = RealmViewModel() // 뷰 모델
-    
-    var navigationTitle: String { // 네비게이션 타이틀
-        return "[Realm]"
-    }
-    
+
     // MARK: - UIViewController Life Cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         d("viewDidLoad() >> Start !!!")
+        
+        // 디버그 태그
+        setTag("[\(NSLocalizedString("Realm", comment: ""))]")
+        
+        // 네비게이션 타이틀
+        setTitle(NSLocalizedString("Realm", comment: ""))
+        
+        // 뒤로가기 버튼
+        self.addBackButton()
         
 //        for i in 0 ..< 10 {
 //            let dateRealm = DateRealm()

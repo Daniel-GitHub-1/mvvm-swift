@@ -2,7 +2,7 @@
 //  Enum.swift
 //  MVVMSwift
 //
-//  Created by crecolto on 2021/02/02.
+//  Created by Daniel on 2021/02/02.
 //
 
 /**
@@ -16,19 +16,28 @@
  * @copyright Copyright © 2021 ZwooSoft All rights reserved.
  **/
 class Enum {
-    // 실패 이유
-    enum GetFailureReason: Int, Error {
-        case NOT_CONNECTED = 0
-        case NONE = 200
-        case UN_AUTHORIZED = 401
-        case NOT_FOUND = 404
+
+    /**
+     * 디바이스
+     *
+     * @return String
+     */
+    enum Devices: String {
+        case IPHONE = "iPhone"
+        case IPAD = "iPad"
+        case IMAC = "iMac"
+        case MACBOOK = "MacBook"
     }
     
-    // 디바이스
-    enum Devices: String {
-        case iPhone = "iPhone"
-        case iPad = "iPad"
-        case iMac = "iMac"
-        case MacBook = "MacBook"
+    /**
+     * Loading 타입
+     *
+     * @return Int
+     */
+    enum LoadingType: Int {
+        case NONE = 0
+        case LOAD = 1
+        case SAVE = 2
+        case DELETE = 3
     }
 }

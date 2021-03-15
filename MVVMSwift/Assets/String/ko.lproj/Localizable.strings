@@ -1,0 +1,38 @@
+/* 
+  Localizable.strings
+  MVVMSwift
+
+  Created by Daniel on 2021/02/18.
+  
+*/
+
+// Common
+"Hello" = "안녕";
+"Confirm" = "확인";
+"Cancel" = "취소";
+
+// View Name
+"Intro" = "인트로";
+"Main" = "메인";
+"Table" = "테이블";
+"Web" = "웹";
+"Settings" = "세팅";
+"CoreData" = "코어 데이터";
+"Realm" = "렐름";
+
+// 로그인
+"InputId" = "아이디를 입력해 주세요.";
+"InputPw" = "비밀번호를 입력해 주세요.";
+
+// SNS
+"SMS" = "문자";
+"Kakao" = "카카오";
+"Band" = "밴드";
+
+//Camera
+"TakePhoto" = "사진 촬영";
+"CameraRoll" = "카메라 롤";
+"PhotoLibrary" = "포토 라이브러리";
+
+
+
