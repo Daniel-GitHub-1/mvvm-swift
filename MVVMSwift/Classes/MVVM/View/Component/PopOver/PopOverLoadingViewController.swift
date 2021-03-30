@@ -5,10 +5,6 @@
 //  Created by Daniel on 2021/02/18.
 //
 
-import UIKit
-
-
-
 protocol PopOverLoadingViewDelegate: NSObjectProtocol {
     
     /**
@@ -16,36 +12,26 @@ protocol PopOverLoadingViewDelegate: NSObjectProtocol {
      *
      * @param controller // 컨트롤러
      * @param loadingType // 로딩 타입
-     * @param index // 인텍스
      */
     func PopOverLoadingViewDelegate(controller: PopOverLoadingViewController,
                                     loadingType: Enum.LoadingType)
 }
 
-/**
- * PopOverLoadingViewController.swift
- *
- * @description 로딩 뷰 컨트롤러
- * @author Daniel
- * @Constructor ZwooSoft
- * @version 1.0.0
- * @since 02/19/21 10:52 AM
- * @copyright Copyright © 2021 ZwooSoft All rights reserved.
- **/
-class PopOverLoadingViewController: UIViewController {
-    
-    let TAG: String = "[PopOverLoadingViewController]" // 디버그 태그
+class PopOverLoadingViewController: BaseViewController {
     
     @IBOutlet var ivLoading: UIImageView! // 로딩 이미지
+    
     var delegate: PopOverLoadingViewDelegate? // 델리게이트
-
     var loadingType: Enum.LoadingType = .NONE // 로딩 타입
     
     override func viewDidLoad() {
-        print("\(TAG) viewDidLoad() >> Start !!!")
-        print("\(TAG) viewDidLoad() >> width: \(self.view.frame.width)")
-        print("\(TAG) viewDidLoad() >> height: \(self.view.frame.height)")
+        d("viewDidLoad() >> Start !!!")
         super.viewDidLoad()
+        
+        // 뷰 컨트롤러 초기화
+        self.initViewController(self,
+                                navTitle: "",
+                                tag: "[PopOverLoadingView]")
         
         ivLoading.animationImages = self.getImages()
         ivLoading.animationDuration = 3.0
@@ -54,27 +40,11 @@ class PopOverLoadingViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        print("\(TAG) viewWillAppear() >> Start !!!")
-  
+        d("viewWillAppear() >> Start !!!")
+        
         self.delegate?.PopOverLoadingViewDelegate(controller: self,
                                       loadingType: self.loadingType)
-        
         super.viewWillAppear(animated)
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        print("\(TAG) viewDidAppear() >> Start !!!")
-        super.viewDidAppear(animated)
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        print("\(TAG) viewWillDisappear() >> Start !!!")
-        super.viewWillDisappear(animated)
-    }
-    
-    override func viewDidDisappear(_ animated: Bool) {
-        print("\(TAG) viewDidDisappear() >> Start !!!")
-        super.viewDidDisappear(animated)
     }
     
     /**
@@ -91,7 +61,9 @@ class PopOverLoadingViewController: UIViewController {
         return array
     }
 
-    public func finish() {
+    override func finish(_ animated: Bool) {
+        d("finish() >> Start !!!")
+        
         self.dismiss(animated: false, completion: nil)
     }
 }

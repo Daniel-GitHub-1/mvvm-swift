@@ -40,10 +40,26 @@ class LoginViewController: BaseViewController {
         super.viewDidLoad()
         d("viewDidLoad() >> Start !!!")
         
+        // 뷰 초기화
+        initView()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        d("viewWillAppear() >> Start !!!")
+        super.viewWillAppear(animated)
+        
+        // 네비게이션바 숨김
+        setUpHiddenNavigationBar()
+    }
+    
+    /**
+     * 뷰 초기화
+     */
+    private func initView() {
         // 뷰 컨트롤러 초기ㅏ화
-        self.initViewController(LoginViewController.self,
-                                navTitle: getString("Login"),
-                                tag: getString("Login"))
+        initViewController(self,
+                           navTitle: getString("Login"),
+                           tag: "[\(getString("Login"))]")
         // 아이디
         tfId?.placeholder = getString("InputId")
         
@@ -55,16 +71,8 @@ class LoginViewController: BaseViewController {
         binding()
         
         // 폰트 설정
-        self.tfId?.font = self.getRobotoRegular(15)
-        self.tfPw?.font = self.getRobotoRegular(15)
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        d("viewWillAppear() >> Start !!!")
-        super.viewWillAppear(animated)
-        
-        // 네비게이션바 숨김
-        setUpHiddenNavigationBar()
+        tfId?.font = self.getRobotoRegular(15)
+        tfPw?.font = self.getRobotoRegular(15)
     }
     
     // MARK: - Action
@@ -80,10 +88,10 @@ class LoginViewController: BaseViewController {
         // 로딩 프로그레스바 시작
         startLoading()
         
-        let id = self.tfId?.text ?? ""
+        let id = tfId?.text ?? ""
         d("actionLogin() >> id: \(String(describing: id))")
         
-        let pw = self.tfPw?.text ?? ""
+        let pw = tfPw?.text ?? ""
         d("actionLogin() >> pw: \(String(describing: pw))")
         
         // 로그인 요청 파라미터
@@ -168,7 +176,7 @@ class LoginViewController: BaseViewController {
     /**
      * 로그인 버튼 유효성
      */
-    func isValidLoginButton() {
+    private func isValidLoginButton() {
         // LoginViewModel의 isValid() 유효성 검사 결과값을 (Observable<Bool>)을 로그인 버튼의 isEnabled 속성에 바인딩
         viewModel.isValid()
             .bind(to: (btnLogIn?.rx.isEnabled)!)

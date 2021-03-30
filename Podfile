@@ -35,5 +35,8 @@ target 'MVVMSwift' do
 
   # Kakao SDK
   pod 'RxKakaoSDK'
+	
+  # AMChart
+  #pod 'AMChart'
 
 end

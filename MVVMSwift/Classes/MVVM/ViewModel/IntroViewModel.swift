@@ -22,22 +22,22 @@ class IntroViewModel: BaseViewModel {
      *
      * @param viewController UIViewController
      * @param parameters 파라미터
-     * @returns onResult(Bool, Version, GetFailureReason)
+     * @returns completion(Bool, Version, GetFailureReason)
      */
     func getLogin(_ viewController: UIViewController,
                   parameters: Parameters,
-                  onResult: @escaping (Bool, Login, GetFailureReason) -> ()) {
+                  completion: @escaping (Bool, Login, GetFailureReason) -> ()) {
         self.d("getLogin() >> parameters: \(parameters)")
         
         loginService
             .getLogin(parameters)
             .subscribe(
                 onNext: { result in
-                    onResult(true, result, GetFailureReason.NONE)
+                    completion(true, result, GetFailureReason.NONE)
                     self.d("getLogin() >> result: \(result)")
                 },
                 onError: { error in
-                    onResult(false, Login.init(),
+                    completion(false, Login.init(),
                              error as? GetFailureReason ?? GetFailureReason.NONE)
                     self.d("getLogin() >> error: \(error)")
                 }

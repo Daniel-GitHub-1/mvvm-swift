@@ -21,16 +21,6 @@ protocol BottomSheetMoreDelegate: NSObjectProtocol {
                                  index: Int)
 }
 
-/**
- * BottomSheetMoreViewController.swift
- *
- * @description 더보기 뷰 컨트롤러
- * @author Daniel
- * @Constructor ZwooSoft
- * @version 1.0.0
- * @since 02/19/21 10:52 AM
- * @copyright Copyright © 2021 ZwooSoft All rights reserved.
- **/
 class BottomSheetMoreViewController: BaseViewController {
     
     var delegate: BottomSheetMoreDelegate? // 델리게이트
@@ -49,9 +39,12 @@ class BottomSheetMoreViewController: BaseViewController {
     
     override func viewDidLoad() {
         d("viewDidLoad() >> Start !!!")
-        d("viewDidLoad() >> width: \(self.view.frame.width)")
-        d("viewDidLoad() >> height: \(self.view.frame.height)")
         super.viewDidLoad()
+        
+        // 뷰 컨트롤러 초기화
+        self.initViewController(self,
+                                navTitle: "",
+                                tag: "[BottomSheetMoreView]")
         
         // 메인
         self.vwMain?.addRoundCorners(50, corners: [.layerMaxXMinYCorner])

@@ -33,13 +33,13 @@ class DialogUtil {
      * @param title     타이틀
      * @param message     메시지
      * @param contents  컨텐츠
-     * @returns onResult content
+     * @returns completion content
      */
     func show(controller: UIViewController,
               title: String!,
               message: String!,
               contents: [String]!,
-              onResult: @escaping (String) -> Void) {
+              completion: @escaping (String) -> Void) {
         print("\(TAG) show() >> Start !!!")
         print("\(TAG) show() >> controller: \(String(describing: controller))")
         print("\(TAG) show() >> title: \(String(describing: title))")
@@ -56,7 +56,7 @@ class DialogUtil {
                     || content == "로그아웃") {
                 action = UIAlertAction(title: content,
                                        style: .destructive) { (action:UIAlertAction) in
-                    onResult(content)
+                    completion(content)
                     print("\(self.TAG) show() >> action.title: \(String(describing: action.title))")
                 }
                 
@@ -64,7 +64,7 @@ class DialogUtil {
             } else {
                 action = UIAlertAction(title: content,
                                        style: .default) { (action:UIAlertAction) in
-                    onResult(content)
+                    completion(content)
                     print("\(self.TAG) show() >> action.title: \(String(describing: action.title))")
                 }
                 alertController.addAction(action)
@@ -90,13 +90,13 @@ class DialogUtil {
      * @param title     타이틀
      * @param message     메시지
      * @param contents  컨텐츠
-     * @returns onResult content
+     * @returns completion content
      */
     func showSheet(controller: UIViewController,
                    title: String!,
                    message: String!,
                    contents: [String]!,
-                   onResult: @escaping (String) -> Void) {
+                   completion: @escaping (String) -> Void) {
         print("\(TAG) showSheet() >> Start !!!")
         print("\(TAG) showSheet() >> controller: \(String(describing: controller))")
         print("\(TAG) showSheet() >> title: \(String(describing: title))")
@@ -113,7 +113,7 @@ class DialogUtil {
                     || content == "로그아웃") {
                 action = UIAlertAction(title: content,
                                        style: .destructive) { (action:UIAlertAction) in
-                    onResult(content)
+                    completion(content)
                     print("\(self.TAG) showSheet() >> action.title: \(String(describing: action.title))")
                 }
                 
@@ -122,14 +122,14 @@ class DialogUtil {
                         || content == "닫기") {
                 action = UIAlertAction(title: content,
                                        style: .cancel) { (action:UIAlertAction) in
-                    onResult(content)
+                    completion(content)
                     print("\(self.TAG) showSheet() >> action.title: \(String(describing: action.title))")
                 }
                 alertController.addAction(action)
             } else {
                 action = UIAlertAction(title: content,
                                        style: .default) { (action:UIAlertAction) in
-                    onResult(content)
+                    completion(content)
                     print("\(self.TAG) showSheet() >> action.title: \(String(describing: action.title))")
                 }
                 alertController.addAction(action)
@@ -148,10 +148,10 @@ class DialogUtil {
      * 오프라인 다이얼로그
      *
      * @param controller UIViewController
-     * @returns onResult content
+     * @returns completion content
      */
     func showOffline(controller: UIViewController,
-                     onResult: @escaping (String) -> Void) {
+                     completion: @escaping (String) -> Void) {
         // 오프라인
         let title = "알림"
         let message = Ment.MENT_ERROR_NETWORK
@@ -172,7 +172,7 @@ class DialogUtil {
         for content in contents {
             action = UIAlertAction(title: content, style: .default) { (action:UIAlertAction) in
                 print("\(self.TAG) showOffline() -> content: \(String(describing: content))")
-                onResult(content)
+                completion(content)
             }
             alertController.addAction(action)
         }

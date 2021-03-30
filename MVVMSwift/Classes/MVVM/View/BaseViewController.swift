@@ -6,28 +6,28 @@
 //
 
 @_exported import Foundation
+@_exported import SwiftUI
 @_exported import UIKit
+@_exported import WebKit
 
 // RxSwift
 @_exported import RxCocoa
 @_exported import RxSwift
 @_exported import RxViewController
 
-protocol ViewModel: class {
-    var title: String { get }
-}
+@_exported import MaterialComponents.MaterialBottomSheet
+@_exported import MessageUI
 
-/**
- * BaseViewController.swift
- *
- * @description 기본 뷰 컨트롤러
- * @author Daniel
- * @Constructor ZwooSoft
- * @version 1.0.0
- * @since 02/16/21 10:52 AM
- * @copyright Copyright © 2021 ZwooSoft All rights reserved.
- **/
-class BaseViewController: UIViewController, UIPopoverPresentationControllerDelegate {
+// KakaoTalk
+@_exported import KakaoSDKUser
+@_exported import RxKakaoSDKUser
+@_exported import KakaoSDKTalk
+@_exported import KakaoSDKLink
+@_exported import RxKakaoSDKLink
+@_exported import KakaoSDKAuth
+@_exported import RxKakaoSDKAuth
+
+class BaseViewController: UIViewController {
     var navTitle = "" // 네비게이션 타이틀
     var tag = "" // 디버그 태그
     
@@ -48,12 +48,17 @@ class BaseViewController: UIViewController, UIPopoverPresentationControllerDeleg
      * @param navTitle 네비게이션 타이틀
      * @param tag 디버그 태그
      */
-    func initViewController<T>(_ viewController: T,
-                               navTitle: String,
-                               tag: String) {
-        self.setTag(tag)
-        self.setTitle(navTitle)
-        self.parentController = self
+    func initViewController(_ viewController: UIViewController,
+                            navTitle: String,
+                            tag: String) {
+        
+        d("initViewController() >> controller: \(viewController)")
+        d("initViewController() >> navTitle: \(navTitle)")
+        d("initViewController() >> tag: \(tag)")
+        
+        setTag(tag)
+        setTitle(navTitle)
+        parentController = viewController
     }
     
     // MARK: - UIViewController Life Cycle
@@ -96,25 +101,16 @@ class BaseViewController: UIViewController, UIPopoverPresentationControllerDeleg
         super.didReceiveMemoryWarning()
     }
     
-    // MARK: - UIPopoverPresentationControllerDelegate
+    // MARK: - Touch Event
     
-    func prepareForPopoverPresentation(_ popoverPresentationController: UIPopoverPresentationController) {
-        d("prepareForPopoverPresentation() >> Start !!!")
-        self.setAlphaOfBackgroundViews(alpha: BaseViewController.ALPHA_SEMI_MAX)
+    override func touchesBegan(_ touches: Set<UITouch>,
+                               with event: UIEvent?) {
+        // 키보드 내리기
+        self.view.endEditing(true)
     }
     
-    func popoverPresentationControllerDidDismissPopover(_ popoverPresentationController: UIPopoverPresentationController) {
-        d("popoverPresentationControllerDidDismissPopover() >> Start !!!")
-        self.setAlphaOfBackgroundViews(alpha: BaseViewController.ALPHA_MAX)
-    }
-    
-    func popoverPresentationControllerShouldDismissPopover(_ popoverPresentationController: UIPopoverPresentationController) -> Bool {
-        d("popoverPresentationControllerShouldDismissPopover() >> Start !!!")
-        return self.dismissible
-    }
-    
-    func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
-        return UIModalPresentationStyle.none
+    override func touchesEnded(_ touches: Set<UITouch>,
+                               with event: UIEvent?) {
     }
     
     // MARK: - Function
@@ -122,75 +118,28 @@ class BaseViewController: UIViewController, UIPopoverPresentationControllerDeleg
     /**
      * 네비게이션바 설정
      *
-     * @param title 타이틀
-     */
-    func setUpNavigationBar(_ title: String) {
-        d("setUpNavigationBar() >> Start !!!")
-        self.navigationController?.setNavigationBarHidden(false,
-                                                          animated: true)
-        if let color = "#3766F2".hexString2UIColor() {
-            self.navigationController?.navigationBar.barTintColor = color
-        }
-        
-        if title.isEmpty {
-            self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
-            self.navigationController?.navigationBar.shadowImage = UIImage()
-        } else {
-            self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
-            self.navigationController?.navigationBar.isTranslucent = false
-            self.navigationItem.title = title
-        }
-    }
-    
-    /**
-     * 네비게이션바 설정
-     *
-     * @param title 타이틀
      * @param barTintColor 네비게이션바 색상 (String)
      */
-    func setUpNavigationBar(_ title: String,
-                            barTintColor: String) {
+    func setUpNavigationBar(_ barTintColor: String) {
         d("setUpNavigationBar() >> Start !!!")
-        self.navigationController?.setNavigationBarHidden(false,
-                                                          animated: true)
-
+        self.navigationController?.setNavigationBarHidden(false, animated: true)
+        
+        d("setUpNavigationBar() >> navTitle: \(navTitle)")
+        d("setUpNavigationBar() >> barTintColor: \(barTintColor)")
+        
         if let color = barTintColor.hexString2UIColor() {
             self.navigationController?.navigationBar.barTintColor = color
+            d("setUpNavigationBar() >> color: \(color)")
         }
-        
-        if title.isEmpty {
+
+        if navTitle.isEmpty {
             self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
             self.navigationController?.navigationBar.shadowImage = UIImage()
-            self.navigationItem.title = title
+            self.navigationItem.title = navTitle
         } else {
             self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
             self.navigationController?.navigationBar.isTranslucent = false
-            self.navigationItem.title = title
-        }
-    }
-    
-    /**
-     * 네비게이션바 설정
-     *
-     * @param title 타이틀
-     * @param barTintColor 네비게이션바 색상 (UIColor)
-     */
-    func setUpNavigationBar(_ title: String,
-                            barTintColor: UIColor) {
-        d("setUpNavigationBar() >> Start !!!")
-        self.navigationController?.setNavigationBarHidden(false,
-                                                          animated: true)
-
-        self.navigationController?.navigationBar.barTintColor = barTintColor
-
-        if title.isEmpty {
-            self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
-            self.navigationController?.navigationBar.shadowImage = UIImage()
-            self.navigationItem.title = title
-        } else {
-            self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
-            self.navigationController?.navigationBar.isTranslucent = false
-            self.navigationItem.title = title
+            self.navigationItem.title = navTitle
         }
     }
     
@@ -342,7 +291,7 @@ class BaseViewController: UIViewController, UIPopoverPresentationControllerDeleg
      * @param title 타이틀
      */
     func setTitle(_ title: String) {
-        self.title = title
+        self.navTitle = title
     }
     
     /**
@@ -375,6 +324,15 @@ class BaseViewController: UIViewController, UIPopoverPresentationControllerDeleg
      */
     func d(_ msg: String) {
         LogUtil.sharedInstance.d("\(self.tag) \(msg)")
+    }
+    
+    /**
+     * 디버그 (유니코드 > 한글)
+     *
+     * @param msg 메시지
+     */
+    func koLog(_ msg: String) {
+        d(LogUtil.sharedInstance.koLog("\(self.tag) \(msg)"))
     }
     
     /**
@@ -581,6 +539,34 @@ class BaseViewController: UIViewController, UIPopoverPresentationControllerDeleg
     }
     
     /**
+     * 로딩 프로그레스바 시작 (GIF)
+     *
+     */
+    func startAniLoading() {
+        self.d("startAniLoading() >> Start !!!")
+        self.gotoPopOverAniLoadingViewController()
+    }
+    
+    /**
+     * 로딩 프로그레스바 종료 (GIF)
+     *
+     */
+    func stopAniLoading() {
+        self.d("stopAniLoading() >> Start !!!")
+        self.loadingTimer?.invalidate()
+        self.d("loadingController() >> \(loadingController)")
+        
+        // 프로그레스 다이얼로그 종료
+        DispatchQueue
+            .main
+            .asyncAfter(deadline: .now() + 0.5) { // 0.1초
+                self.loadingController.dismiss(animated: false,
+                                               completion: nil)
+                self.setAlphaOfBackgroundViews(alpha: BaseViewController.ALPHA_MAX)
+            }
+    }
+    
+    /**
      * 뷰 컨트롤러 종료
      *
      *  @param animated 애니메이션 효과
@@ -681,6 +667,91 @@ class BaseViewController: UIViewController, UIPopoverPresentationControllerDeleg
                 self.present(popOverLoadingViewController, animated: false, completion: nil)
             }
     }
+    
+    /**
+     * 로딩 뷰 컨트롤러 (GIF)
+     *
+     */
+    func gotoPopOverAniLoadingViewController() {
+        self.d("gotoPopOverAniLoadingViewController() >> Start !!!")
+        OperationQueue.main.addOperation {
+            let storyBoard: UIStoryboard = UIStoryboard(name: "PopOver", bundle: nil)
+            let popOverAniLoadingViewController = storyBoard.instantiateViewController(withIdentifier: "PopOverAniLoadingView") as! PopOverAniLoadingViewController
+            popOverAniLoadingViewController.delegate = self
+            popOverAniLoadingViewController.modalPresentationStyle = UIModalPresentationStyle.popover
+            popOverAniLoadingViewController.preferredContentSize
+                = CGSize(width: Define.LOADING_VIEW_WIDTH_SIZE,
+                         height: Define.LOADING_VIEW_HEIGHT_SIZE)
+            let popoverPresentationController = popOverAniLoadingViewController.popoverPresentationController
+            
+            if let presentationController = popoverPresentationController {
+                presentationController.delegate = self
+                presentationController.sourceView = self.view
+                presentationController.passthroughViews = nil
+                presentationController.sourceRect
+                    = CGRect(x: self.view.bounds.midX,
+                             y: self.view.bounds.midY,
+                             width: 0,
+                             height: 0)
+                presentationController.permittedArrowDirections = UIPopoverArrowDirection.init(rawValue: 0)
+            }
+            self.present(popOverAniLoadingViewController, animated: true, completion: nil)
+        }
+    }
+    
+    /**
+     * Botom Sheet 컨틀롤러 이동
+     *
+     */
+    func gotoBottomSheetViewController<T>(name: String!,
+                                          withIdentifier: String!,
+                                          of theClass: T,
+                                          height: CGFloat,
+                                          animated: Bool,
+                                          completion: @escaping (T) -> Void) {
+        d("gotoBottomSheetViewController() >> Start !!!")
+        
+        DispatchQueue
+            .main
+            .async {
+                if let controller
+                    = UIStoryboard(name: name,
+                                   bundle: nil).instantiateViewController(withIdentifier: withIdentifier) as? T {
+                    self.d("gotoViewController() >> controller: \(controller)")
+                    let bottomSheet: MDCBottomSheetController = MDCBottomSheetController(contentViewController: controller as! UIViewController)
+                    bottomSheet.preferredContentSize = CGSize(width: self.view.frame.size.width, height: height)
+                    bottomSheet.dismissOnDraggingDownSheet = false
+                    self.present(bottomSheet, animated: true, completion: nil)
+                }
+            }
+    }
+    
+    /**
+     * Botom Sheet 컨틀롤러 이동
+     *
+     */
+    func gotoBottomSheetViewController<T>(identifier: String!,
+                                          of theClass: T,
+                                          height: CGFloat,
+                                          animated: Bool,
+                                          completion: @escaping (T) -> Void) {
+        d("gotoBottomSheetViewController() >> Start !!!")
+        
+        DispatchQueue
+            .main
+            .async {
+                if let contrroller
+                    = UIStoryboard(name: "BottomSheet",
+                                   bundle: nil).instantiateViewController(withIdentifier: identifier) as? T {
+                    
+                    let bottomSheet: MDCBottomSheetController = MDCBottomSheetController(contentViewController: contrroller as! UIViewController)
+                    bottomSheet.preferredContentSize = CGSize(width: self.view.frame.size.width, height: height)
+                    bottomSheet.dismissOnDraggingDownSheet = false
+                    self.present(bottomSheet, animated: true, completion: nil)
+                    
+                }
+            }
+    }
 
     /**
      * 뷰 컨틀로러 이동
@@ -700,7 +771,8 @@ class BaseViewController: UIViewController, UIPopoverPresentationControllerDeleg
             .main
             .async {
                 if let controller
-                    = UIStoryboard(name: name, bundle: nil).instantiateViewController(withIdentifier: withIdentifier) as? T {
+                    = UIStoryboard(name: name,
+                                   bundle: nil).instantiateViewController(withIdentifier: withIdentifier) as? T {
                     self.d("gotoViewController() >> controller: \(controller)")
                     if let navigationController = self.navigationController {
                         self.d("gotoViewController() >> navigationController: \(navigationController)")
@@ -710,8 +782,72 @@ class BaseViewController: UIViewController, UIPopoverPresentationControllerDeleg
                 }
             }
     }
+    
+    /**
+     * 뷰 컨틀로러 이동
+     *
+     * @param withIdentifier 뷰 컨틀롤러 식별자
+     * @param of theClass 타겟 클래스
+     * @param animated 애니메이션 적용 여부
+     * @return completion 뷰컨트롤러
+     */
+    func gotoViewController(identifier: String!,
+                            animated: Bool,
+                            completion: @escaping (UIViewController) -> Void) {
+        d("gotoViewController() >> Start !!!")
+        DispatchQueue
+            .main
+            .async {
+                guard let controller = self.storyboard?.instantiateViewController(withIdentifier: identifier) else {
+                    return
+                }
+                if let navigationController = self.navigationController {
+                    self.d("gotoViewController() >> navigationController: \(navigationController)")
+                    navigationController.pushViewController(controller, animated: animated)
+                    completion(controller)
+                }
+            }
+    }
+    
+    /**
+     * View Controller
+     *
+     * @return UIViewController
+     */
+    func getViewController() -> UIViewController? {
+        if let appName = Bundle.main.infoDictionary?["CFBundleName"] as? String {
+            print("CFBundleName - \(appName)")
+            if let viewControllerType = NSClassFromString("\(appName).\(self)") as? UIViewController.Type {
+                return viewControllerType.init()
+            }
+        }
+        return nil
+    }
 }
 
+// MARK: - UIPopoverPresentationControllerDelegate
+
+extension BaseViewController: UIPopoverPresentationControllerDelegate {
+
+    func prepareForPopoverPresentation(_ popoverPresentationController: UIPopoverPresentationController) {
+        d("prepareForPopoverPresentation() >> Start !!!")
+        setAlphaOfBackgroundViews(alpha: BaseViewController.ALPHA_SEMI_MAX)
+    }
+    
+    func popoverPresentationControllerDidDismissPopover(_ popoverPresentationController: UIPopoverPresentationController) {
+        d("popoverPresentationControllerDidDismissPopover() >> Start !!!")
+        setAlphaOfBackgroundViews(alpha: BaseViewController.ALPHA_MAX)
+    }
+    
+    func popoverPresentationControllerShouldDismissPopover(_ popoverPresentationController: UIPopoverPresentationController) -> Bool {
+        d("popoverPresentationControllerShouldDismissPopover() >> Start !!!")
+        return dismissible
+    }
+    
+    func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
+        return UIModalPresentationStyle.none
+    }
+}
 
 // MARK: - LoadingView Delegate
 
@@ -730,20 +866,74 @@ extension BaseViewController: PopOverLoadingViewDelegate {
     }
 }
 
-extension String {
-    /**
-     * View Controller
-     *
-     * @return UIViewController
-     */
-    func getViewController() -> UIViewController? {
+// MARK: - AniLoadingView Delegate
+
+extension BaseViewController: PopOverAniLoadingViewDelegate {
+    func PopOverAniLoadingViewDelegate(controller: PopOverAniLoadingViewController,
+                                       loadingType: Enum.LoadingType) {
+        d("PopOverAniLoadingViewDelegate() >> controller: \(controller)")
+        d("PopOverAniLoadingViewDelegate() >> loadingType: \(loadingType)")
         
-        if let appName = Bundle.main.infoDictionary?["CFBundleName"] as? String {
-            print("CFBundleName - \(appName)")
-            if let viewControllerType = NSClassFromString("\(appName).\(self)") as? UIViewController.Type {
-                return viewControllerType.init()
-            }
-        }
-        return nil
+        self.loadingController = controller
+        self.loadingTimer = Timer.scheduledTimer(withTimeInterval: Define.LOADING_INTERVAL,
+                                                 repeats: false,
+                                                 block: { timer in
+                                                    self.stopLoading()
+                                                 })
     }
 }
+
+// MARK: - UITextField Delegate
+
+extension BaseViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        d("textFieldShouldReturn() >> textField: \(textField)")
+        textField.resignFirstResponder()
+        return true
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        d("textFieldDidEndEditing() >> textField: \(textField)")
+    }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        d("textFieldDidBeginEditing() >> textField: \(textField)")
+    }
+    
+    func textFieldDidChangeSelection(_ textField: UITextField) {
+        d("textFieldDidChangeSelection() >> textField: \(textField)")
+    }
+    
+    func textFieldShouldClear(_ textField: UITextField) -> Bool {
+        d("textFieldShouldClear() >> textField: \(textField)")
+        return true
+    }
+    
+    func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
+        d("textFieldShouldEndEditing() >> textField: \(textField)")
+        return true
+    }
+    
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+        d("textFieldShouldBeginEditing() >> textField: \(textField)")
+        return true
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField, reason: UITextField.DidEndEditingReason) {
+        d("textFieldDidEndEditing() >> textField: \(textField)")
+        d("textFieldDidEndEditing() >> reason: \(reason)")
+    }
+    
+    func textField(_ textField: UITextField,
+                   shouldChangeCharactersIn range: NSRange,
+                   replacementString string: String) -> Bool {
+        d("textField() >> textField: \(textField)")
+        d("textField() >> range: \(range)")
+        d("textField() >> string: \(string)")
+        return true
+    }
+}
+
+
+
+

@@ -28,18 +28,18 @@ class ListViewModel: BaseViewModel {
      */
     func getListData(_ viewController: UIViewController,
                      parameters: Parameters,
-                     onResult: @escaping (Bool, ListData, GetFailureReason) -> ()) {
+                     completion: @escaping (Bool, ListData, GetFailureReason) -> ()) {
         d("getListData() >> parameters: \(parameters)")
         
         listDataService
             .getListData(parameters)
             .subscribe(
                 onNext: { result in
-                    onResult(true, result, GetFailureReason.NONE)
+                    completion(true, result, GetFailureReason.NONE)
                     self.d("getListData() >> result: \(result)")
                 },
                 onError: { error in
-                    onResult(false, ListData.init(),
+                    completion(false, ListData.init(),
                              error as? GetFailureReason ?? GetFailureReason.NONE)
                     self.d("getListData() >> error: \(error)")
                 }

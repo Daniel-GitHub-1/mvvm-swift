@@ -3,12 +3,13 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 51;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		73024BB825DB9FAD003C7FE3 /* LocationUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73024BB725DB9FAD003C7FE3 /* LocationUtil.swift */; };
 		7304469925DF51E000B76261 /* ViewUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7304469825DF51E000B76261 /* ViewUtil.swift */; };
+		7314A8E32602DF72008AFA47 /* StringUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7314A8E22602DF72008AFA47 /* StringUtil.swift */; };
 		732FD2CA25DE26D700CA75F8 /* ani_loading.gif in Resources */ = {isa = PBXBuildFile; fileRef = 732FD2C825DE26D600CA75F8 /* ani_loading.gif */; };
 		732FD2CB25DE26D700CA75F8 /* ani_sound.gif in Resources */ = {isa = PBXBuildFile; fileRef = 732FD2C925DE26D700CA75F8 /* ani_sound.gif */; };
 		732FD2D025DE26F800CA75F8 /* PopOverAniLoadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 732FD2CF25DE26F800CA75F8 /* PopOverAniLoadingViewController.swift */; };
@@ -133,6 +134,10 @@
 		7379B89B25E4A66300D04212 /* Login.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7379B89A25E4A66300D04212 /* Login.swift */; };
 		738195A025D278E40004A11E /* LogUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7381959F25D278E40004A11E /* LogUtil.swift */; };
 		738195A925D279700004A11E /* sample.html in Resources */ = {isa = PBXBuildFile; fileRef = 738195A825D279700004A11E /* sample.html */; };
+		738E5A4E26047F3C00C854DA /* ChartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 738E5A4D26047F3C00C854DA /* ChartViewController.swift */; };
+		738E5A802604894200C854DA /* ChartsDynamic in Frameworks */ = {isa = PBXBuildFile; productRef = 738E5A7F2604894200C854DA /* ChartsDynamic */; };
+		738E5A812604894200C854DA /* ChartsDynamic in Embed Frameworks */ = {isa = PBXBuildFile; productRef = 738E5A7F2604894200C854DA /* ChartsDynamic */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		738E5A862604896D00C854DA /* BaseChartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 738E5A852604896D00C854DA /* BaseChartViewController.swift */; };
 		739EB70725CCEF0F00D3E455 /* ListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 739EB70625CCEF0F00D3E455 /* ListViewModel.swift */; };
 		739EB70C25CD00DC00D3E455 /* ListDataInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 739EB70B25CD00DC00D3E455 /* ListDataInfo.swift */; };
 		73B3300525E5D6E4001B3888 /* LoginService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73B3300425E5D6E4001B3888 /* LoginService.swift */; };
@@ -194,11 +199,26 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		738E5A822604894200C854DA /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				738E5A812604894200C854DA /* ChartsDynamic in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		228F209BC1898475D4AE1BCC /* Pods_MVVMSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MVVMSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4AF348D34F5F51C80C704FD1 /* Pods-MVVMSwift.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MVVMSwift.release.xcconfig"; path = "Target Support Files/Pods-MVVMSwift/Pods-MVVMSwift.release.xcconfig"; sourceTree = "<group>"; };
 		73024BB725DB9FAD003C7FE3 /* LocationUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationUtil.swift; sourceTree = "<group>"; };
 		7304469825DF51E000B76261 /* ViewUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewUtil.swift; sourceTree = "<group>"; };
+		7314A8E22602DF72008AFA47 /* StringUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringUtil.swift; sourceTree = "<group>"; };
 		732FD2C825DE26D600CA75F8 /* ani_loading.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = ani_loading.gif; path = "../New Group/ani_loading.gif"; sourceTree = "<group>"; };
 		732FD2C925DE26D700CA75F8 /* ani_sound.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = ani_sound.gif; sourceTree = "<group>"; };
 		732FD2CF25DE26F800CA75F8 /* PopOverAniLoadingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopOverAniLoadingViewController.swift; sourceTree = "<group>"; };
@@ -330,6 +350,8 @@
 		7379B89A25E4A66300D04212 /* Login.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Login.swift; sourceTree = "<group>"; };
 		7381959F25D278E40004A11E /* LogUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogUtil.swift; sourceTree = "<group>"; };
 		738195A825D279700004A11E /* sample.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = sample.html; sourceTree = "<group>"; };
+		738E5A4D26047F3C00C854DA /* ChartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartViewController.swift; sourceTree = "<group>"; };
+		738E5A852604896D00C854DA /* BaseChartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseChartViewController.swift; sourceTree = "<group>"; };
 		739EB70625CCEF0F00D3E455 /* ListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewModel.swift; sourceTree = "<group>"; };
 		739EB70B25CD00DC00D3E455 /* ListDataInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListDataInfo.swift; sourceTree = "<group>"; };
 		73B3300425E5D6E4001B3888 /* LoginService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginService.swift; sourceTree = "<group>"; };
@@ -386,6 +408,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B6D2082C8D684ECAABF084BC /* Pods_MVVMSwift.framework in Frameworks */,
+				738E5A802604894200C854DA /* ChartsDynamic in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -740,6 +763,7 @@
 				735CE13B25EDD025005B374D /* DeviceUtil.swift */,
 				73FB899825FB44A6000DFC04 /* UserDefaultsUtil.swift */,
 				73FB89D725FB61F0000DFC04 /* FontsUtil.swift */,
+				7314A8E22602DF72008AFA47 /* StringUtil.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -750,9 +774,10 @@
 				73E4B71725FEE0C3007C193B /* Base */,
 				73481D4825DF4F0F00C0F026 /* Component */,
 				7362375625C93984000C9E6C /* IntroViewController.swift */,
+				738E5A4D26047F3C00C854DA /* ChartViewController.swift */,
 				73CB52D025E3A44A00D4410D /* LoginViewController.swift */,
-				73CB524325E3678A00D4410D /* MessageViewController.swift */,
 				73E118CE25C28E8700F9F3B2 /* MainViewController.swift */,
+				73CB524325E3678A00D4410D /* MessageViewController.swift */,
 				73CB523E25E3677300D4410D /* CameraViewController.swift */,
 				732FD2FD25DE36EF00CA75F8 /* TableViewController.swift */,
 				7362374425C9348F000C9E6C /* WebViewController.swift */,
@@ -829,6 +854,7 @@
 			isa = PBXGroup;
 			children = (
 				73E1190E25C28FDF00F9F3B2 /* BaseViewController.swift */,
+				738E5A852604896D00C854DA /* BaseChartViewController.swift */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -862,12 +888,16 @@
 				73E118C425C28E8700F9F3B2 /* Frameworks */,
 				73E118C525C28E8700F9F3B2 /* Resources */,
 				7820E61E949954DB9A940A7E /* [CP] Embed Pods Frameworks */,
+				738E5A822604894200C854DA /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			name = MVVMSwift;
+			packageProductDependencies = (
+				738E5A7F2604894200C854DA /* ChartsDynamic */,
+			);
 			productName = MVVMSwift;
 			productReference = 73E118C725C28E8700F9F3B2 /* MVVMSwift.app */;
 			productType = "com.apple.product-type.application";
@@ -941,6 +971,9 @@
 				ko,
 			);
 			mainGroup = 73E118BE25C28E8700F9F3B2;
+			packageReferences = (
+				738E5A7E2604894200C854DA /* XCRemoteSwiftPackageReference "Charts" */,
+			);
 			productRefGroup = 73E118C825C28E8700F9F3B2 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -1125,9 +1158,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7314A8E32602DF72008AFA47 /* StringUtil.swift in Sources */,
 				73CB52D125E3A44A00D4410D /* LoginViewController.swift in Sources */,
 				7362375725C93984000C9E6C /* IntroViewController.swift in Sources */,
 				736100E725E6420D0031A3E1 /* GetFailureReason.swift in Sources */,
+				738E5A4E26047F3C00C854DA /* ChartViewController.swift in Sources */,
 				736236DE25C8EB3E000C9E6C /* Default.swift in Sources */,
 				73481D4A25DF508800C0F026 /* BottomSheetMoreViewController.swift in Sources */,
 				73E1193F25C291B000F9F3B2 /* MainViewModel.swift in Sources */,
@@ -1143,6 +1178,7 @@
 				73CB524425E3678A00D4410D /* MessageViewController.swift in Sources */,
 				73FB899925FB44A6000DFC04 /* UserDefaultsUtil.swift in Sources */,
 				73B3307D25E5EDF9001B3888 /* ListDataViewModel.swift in Sources */,
+				738E5A862604896D00C854DA /* BaseChartViewController.swift in Sources */,
 				739EB70C25CD00DC00D3E455 /* ListDataInfo.swift in Sources */,
 				7344542F25DE03C400FECB36 /* PopOverLoadingViewController.swift in Sources */,
 				7362375C25C939E5000C9E6C /* IntroViewModel.swift in Sources */,
@@ -1535,6 +1571,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		738E5A7E2604894200C854DA /* XCRemoteSwiftPackageReference "Charts" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/danielgindi/Charts.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.0.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		738E5A7F2604894200C854DA /* ChartsDynamic */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 738E5A7E2604894200C854DA /* XCRemoteSwiftPackageReference "Charts" */;
+			productName = ChartsDynamic;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		7347314025DA6CCE00F73E7A /* CoreDataModel.xcdatamodeld */ = {

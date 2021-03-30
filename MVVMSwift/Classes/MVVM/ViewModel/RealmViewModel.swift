@@ -24,21 +24,21 @@ class RealmViewModel: BaseViewModel {
      * 날짜 저장
      *
      * @param dateRealm DateRealm
-     * @return onResult (Bool, String)
+     * @return completion (Bool, String)
      */
     func setDate(dateRealm: DateRealm,
-                 onResult: @escaping (Bool, String) -> ()) {
+                 completion: @escaping (Bool, String) -> ()) {
         try! realm.write {
             realm.add(dateRealm)
-            onResult(true, "")
+            completion(true, "")
         }
-        onResult(false, "")
+        completion(false, "")
     }
     
     /**
      * 모든 날짜
      *
-     * @return onResult (Bool, String)
+     * @return completion (Bool, String)
      */
     func getAllDate() -> Results<DateRealm> {
         let list = realm.objects(DateRealm.self)
@@ -58,14 +58,14 @@ class RealmViewModel: BaseViewModel {
     func deleteDate(year: String,
                     month: String,
                     day: String,
-                    onResult: @escaping (Bool, String) -> ()) {
+                    completion: @escaping (Bool, String) -> ()) {
         do {
             try realm.write{
                 let predicate = NSPredicate(format: "year = %@ AND month = %@ AND day = %@", year, month, day)
                 realm.delete(realm.objects(DateRealm.self).filter(predicate))
-                onResult(true, "")
+                completion(true, "")
             }
         } catch{ print("\(error)") }
-        onResult(false, "")
+        completion(false, "")
     }
 }

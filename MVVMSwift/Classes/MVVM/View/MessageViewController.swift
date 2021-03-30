@@ -53,22 +53,19 @@ class MessageViewController: BaseViewController {
     
     @IBOutlet weak var btnSendMessage: UIButton? // 메시지 전송 버튼
 
-    var viewModel = IntroViewModel() // 뷰 모델
-
     // MARK: - UIViewController Life Cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         d("viewDidLoad() >> Start !!!")
         
-        // 디버그 태그
-        setTag("[\(NSLocalizedString("Message", comment: ""))]")
-        
-        // 네비게이션 타이틀
-        setTitle(NSLocalizedString("Message", comment: ""))
+        // 뷰 컨트롤러 초기ㅏ화
+        initViewController(self,
+                           navTitle: getString("Message"),
+                           tag: "[\(getString("Message"))]")
         
         // 뒤로가기 버튼
-        self.addBackButton()
+        addBackButton()
         
         // 버튼 라운드 설정
         if let color = "#3766F2".hexString2UIColor() {
@@ -79,6 +76,8 @@ class MessageViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         d("viewWillAppear() >> Start !!!")
         super.viewWillAppear(animated)
+        
+        setUpNavigationBar("#3766F2")
     }
     
     /**
@@ -90,7 +89,14 @@ class MessageViewController: BaseViewController {
         d("actionMessage() >> Start !!!")
         
         // Botom Sheet 더보기 컨틀롤러 이동
-        gotoBottomSheetMoreViewController()
+//        gotoBottomSheetMoreViewController()
+        
+        gotoBottomSheetViewController(identifier: "BottomSheetMoreView",
+                                      of: BottomSheetMoreViewController(),
+                                      height: 220.0,
+                                      animated: true) { (controller) in
+            controller.delegate = self
+        }
     }
     
     /**

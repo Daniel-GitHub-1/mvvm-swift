@@ -37,6 +37,7 @@ class Define {
     static let VC_NAME_TABLEVIEW = "TableView" // 테이블 뷰 컨트롤러명
     static let VC_NAME_MESSAGEVIEW = "MessageView" // 메시지 뷰 컨트롤러명
     static let VC_NAME_CAMERAVIEW = "CameraView" // 카메라 뷰 컨트롤러명
+    static let VC_NAME_CHARTVIEW = "ChartView" // 카메라 뷰 컨트롤러명
     
     static let MODEL_NAME: String = "Users" // 코어 데이터 모델명
     

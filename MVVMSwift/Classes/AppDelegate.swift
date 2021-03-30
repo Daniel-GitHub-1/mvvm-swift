@@ -96,3 +96,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 }
 
+// 노티피케이션
+extension Notification.Name {
+    static let reload = Notification.Name("reload")
+}

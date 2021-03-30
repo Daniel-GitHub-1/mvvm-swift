@@ -5,18 +5,6 @@
 //  Created by Daniel on 2021/02/15.
 //
 
-import UIKit
-
-/**
- * RealmViewController.swift
- *
- * @description 렐름 뷰 컨트롤러
- * @author Daniel
- * @Constructor ZwooSoft
- * @version 1.0.0
- * @since 02/16/21 10:52 AM
- * @copyright Copyright © 2021 ZwooSoft All rights reserved.
- **/
 class RealmViewController: BaseViewController {
 
     var viewModel = RealmViewModel() // 뷰 모델
@@ -27,11 +15,10 @@ class RealmViewController: BaseViewController {
         super.viewDidLoad()
         d("viewDidLoad() >> Start !!!")
         
-        // 디버그 태그
-        setTag("[\(NSLocalizedString("Realm", comment: ""))]")
-        
-        // 네비게이션 타이틀
-        setTitle(NSLocalizedString("Realm", comment: ""))
+        // 뷰 컨트롤러 초기화
+        self.initViewController(self,
+                                navTitle: getString("Realm"),
+                                tag:"[\(getString("Realm"))]")
         
         // 뒤로가기 버튼
         self.addBackButton()

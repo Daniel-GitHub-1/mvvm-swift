@@ -53,11 +53,10 @@ class CameraViewController: BaseViewController {
         super.viewDidLoad()
         d("viewDidLoad() >> Start !!!")
         
-        // 디버그 태그
-        setTag("[\(NSLocalizedString("Camera", comment: ""))]")
-        
-        // 네비게이션 타이틀
-        setTitle(NSLocalizedString("Camera", comment: ""))
+        // 뷰 컨트롤러 초기화
+        self.initViewController(self,
+                                navTitle: getString("Camera"),
+                                tag:"[\(getString("Camera"))]")
         
         // 뒤로가기 버튼
         self.addBackButton()

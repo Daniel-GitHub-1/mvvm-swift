@@ -40,7 +40,7 @@ class WebViewController: BaseViewController {
     @IBOutlet var activityIndicator: UIActivityIndicatorView! // 인디게이터 뷰
     
     var delegate: WebViewDelegate? // 델리게이트
-    let viewModel = WebViewModel() // 뷰 모델
+    let webViewModel = WebViewModel() // 뷰 모델
     
     @ObservedObject var locationUtil = LocationUtil()
     
@@ -62,6 +62,8 @@ class WebViewController: BaseViewController {
         webView.uiDelegate = self
         webView.navigationDelegate = self
         
+        webView.configuration.preferences.javaScriptEnabled = true
+        
         self.view.addSubview(webView)
     }
 
@@ -71,47 +73,69 @@ class WebViewController: BaseViewController {
         d("viewDidLoad() >> Start !!!")
         super.viewDidLoad()
         
-        // 디버그 태그
-        setTag("[\(NSLocalizedString("Web", comment: ""))]")
+        // 뷰 초기화
+        initView()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        d("viewWillAppear() >> Start !!!")
+        super.viewWillAppear(animated)
         
-        // 네비게이션 타이틀
-        setTitle(NSLocalizedString("Web", comment: ""))
+        setUpNavigationBar("#3766F2")
+    }
+
+    // MARK: - Function
+    
+    /**
+     *  뷰 초기화
+     *
+     */
+    func initView() {
+        // 뷰 컨트롤러 초기화
+        self.initViewController(self,
+                                navTitle: getString("Web"),
+                                tag:"[\(getString("Web"))]")
         
         // 뒤로가기 버튼
         self.addBackButton()
-        
+
         HTTPCookieStorage.shared.cookieAcceptPolicy = HTTPCookie.AcceptPolicy.always
         
         self.webView.addSubview(self.activityIndicator)
         self.activityIndicator.center = view.center
         self.activityIndicator.startAnimating()
         self.activityIndicator.hidesWhenStopped = true
-
-        // TODO URL 테스트
-//        let url = Define.getMainUrl(subUrl: "")
-//        d("\(TAG) viewDidLoad Start !!!")
-//
+        
+        // TODO 테스트
+//        let url = "http://59.29.245.72:8992/sample/pay"
 //        let request = URLRequest(url: URL(string: url)!)
 //        self.webView.load(request as URLRequest)
+      
+        // todo 테스트
+//        guard let localFilePath = Bundle.main.path(forResource: "sample", ofType: "html") else {
+//            d("initView() >> path is nil !!!")
+//            return
+//        }
+//        d("initView() >> localFilePath: \(localFilePath)")
+//
+//        let url = URL(fileURLWithPath: localFilePath)
+//        let request = URLRequest(url: url)
+//        self.webView.load(request as URLRequest)
         
-        guard let localFilePath = Bundle.main.path(forResource: "sample", ofType: "html") else {
-            d("viewDidLoad() >> path is nil !!!")
-            return
-        }
-        d("viewDidLoad() >> localFilePath: \(localFilePath)")
 
-        let url = URL(fileURLWithPath: localFilePath)
-        let request = URLRequest(url: url)
+        // TODO URL 테스트
+        let url = Url.getWebViewUrl("")
+        d("viewDidLoad Start !!!")
+        
+        let request = URLRequest(url: URL(string: url)!)
         self.webView.load(request as URLRequest)
-
-//        viewModel.getVersion(view: self) { (result, version, msg) in
+        
+//        webViewModel.getVersion(view: self) { (result, version, msg) in
 //            d("getVersion() >> result: \(result)")
 //            d("getVersion() >> version: \(version)")
 //            d("getVersion() >> msg: \(msg)")
 //        }
     }
-
-    // MARK: - Function
     
     /**
      *  URL 요청
@@ -305,13 +329,20 @@ extension WebViewController: WKScriptMessageHandler {
                         d("userContentController() >> name: \(name)")
                         d("userContentController() >> email: \(email)")
                         d("userContentController() >> hp: \(hp)")
-                        
+
                         let dateString = Date().description
                         d("userContentController() >> dateString: \(dateString)")
                         let message = "\(dateString)\n\(name)\n\(email)\n\(hp)"
-                        
+
                         let escaped = message.replacingOccurrences(of: "\n", with: "\\n", options: .literal, range: nil)
                         webView.evaluateJavaScript("showPopup('\(escaped)');", completionHandler: nil)
+                    
+//                        self.gotoViewController(identifier: Define.VC_NAME_SETTINGSVIEW,
+//                                                animated: true,
+//                                                completion: { (viewController) in
+//                            self.d("userContentController() >> viewController: \(viewController)")
+//                      
+//                        })
                     }
                 }
             }

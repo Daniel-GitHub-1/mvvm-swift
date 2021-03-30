@@ -10,15 +10,27 @@ import Foundation
 
 class Url {
     
-    static let BASE_URL = "https://bizq.kr" // 기본 URL
-    static let BASE_PORT = ":8443/" // 기본 PORT
+    static let API_URL = "https://bizq.kr" // API URL
+    static let API_PORT = ":8443/" // API PORT
+    
+    static let WEBVEW_URL = "https://vring.org" // WebView URL
+    static let WEBVEW_PORT = ":8900/" // WebVoew PORT
     
     /**
-     * 메인 URL
+     * API URL
      *
      * @return URL
      */
-    static func getUrl(_ subUrl: String) -> String {
-        return "\(BASE_URL)\(BASE_PORT)\(subUrl)"
+    static func getApiUrl(_ subUrl: String) -> String {
+        return "\(API_URL)\(API_PORT)\(subUrl)"
+    }
+    
+    /**
+     * WebView URL
+     *
+     * @return URL
+     */
+    static func getWebViewUrl(_ subUrl: String) -> String {
+        return "\(WEBVEW_URL)\(WEBVEW_PORT)\(subUrl)"
     }
 }

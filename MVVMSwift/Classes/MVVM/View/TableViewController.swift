@@ -5,16 +5,6 @@
 //  Created by Daniel on 2021/02/18.
 //
 
-import UIKit
-
-// RxSwift
-import RxCocoa
-import RxSwift
-import RxViewController
-
-// Communication
-import Alamofire
-
 /**
  * 테이블 셀
  *
@@ -64,25 +54,30 @@ class TableViewController: BaseViewController {
         super.viewDidLoad()
         d("viewDidLoad() >> Start !!!")
         
-        // 디버그 태그
-        setTag("[\(NSLocalizedString("Table", comment: ""))]")
-        
-        // 네비게이션 타이틀
-        setTitle(NSLocalizedString("Table", comment: ""))
+        // 뷰 컨트롤러 초기화
+        self.initViewController(self,
+                                navTitle: getString("Table"),
+                                tag:"[\(getString("Table"))]")
         
         // 뒤로가기 버튼
         self.addBackButton()
         
         // 테이블 뷰 설정
         self.setTableView()
+        
+        // 노티피케이션 등록
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(reloadTableData),
+                                               name: .reload,
+                                               object: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         d("viewWillAppear() >> Start !!!")
         super.viewWillAppear(animated)
         
-        // 네비게이션바 숨김
-        setUpNavigationBar("Table")
+        // 네비게이션바 설정
+        self.setUpNavigationBar("#3766F2")
         
         DispatchQueue
             .main
@@ -94,6 +89,8 @@ class TableViewController: BaseViewController {
                 self.requestList()
             }
     }
+    
+    // MARK: Function
     
     /**
      * 리스트 요청 세팅
@@ -182,6 +179,16 @@ class TableViewController: BaseViewController {
 //                                      action: #selector(self.refreshTableView),
 //                                      for: .valueChanged)
     }
+    
+    /**
+     * 테이블 갱신
+     *
+     * @notification Notification
+     */
+    @objc func reloadTableData(_ notification: Notification) {
+        self.arrayList.removeAll()
+        self.tbTable.reloadData()
+    }
 }
 
 extension TableViewController: UITableViewDataSource, UITableViewDelegate {
@@ -269,135 +276,3 @@ extension TableViewController: UITableViewDataSource, UITableViewDelegate {
         return cell
     }
 }
-//
-//
-//
-//
-//
-//// MARK: - UITableViewDelegate protocol
-//
-///**
-// * 테이블 뷰 아이템 선택
-// *
-// * @param tableView UITableView
-// * @param indexPath Cell Index
-// */
-//func tableView(_ tableView: UITableView,
-//               didSelectRowAt indexPath: IndexPath) {
-//    d("didSelectRowAt() >> Start !!!")
-//
-//    let index = indexPath.row
-//    let cardBookItem = arrayCardBookItem[index]
-//    d("didSelectRowAt() >> cardBookItem: \(cardBookItem)")
-//
-//    let checkBox = self.checkIsCheckBox()
-//    if checkBox == CheckBox.none {
-//        // index가 0이면,
-//        if (index == 0) {
-//            // 프로필 뷰 컨트롤러 이동
-//            self.gotoProfileViewController()
-//            return
-//        }
-//
-//         d("didSelectRowAt() >> card_type: \(cardBookItem.card_type)")
-//
-//        // 명함타입이 없으면,
-//        if cardBookItem.card_type == .none { return }
-//
-//        if cardBookItem.card_type == .live { // Live 명함 뷰 컨트롤러 이동
-//            self.gotoLiveCardDetailViewController(cardBookItem: cardBookItem)
-//        } else { // 촬영명함 뷰 컨트롤러 이동
-//            self.gotoOcrlogDetailViewController(cardBookItem: cardBookItem,
-//                                                index: index,
-//                                                startType: .detail)
-//        }
-//        return
-//    }
-//
-//    if let value = self.dicSelected[indexPath.row] {
-//        d("didSelectRowAt() >> value: \(value)")
-//        if value {
-//            self.dicSelected[indexPath.row] = false
-//        } else {
-//            self.dicSelected[indexPath.row] = true
-//        }
-//    } else {
-//        self.dicSelected[indexPath.row] = true
-//    }
-//    self.tbCardbook.reloadData()
-//}
-//
-///**
-// * 테이블 뷰 아이템 선택 해제
-// *
-// * @param tableView UITableView
-// * @param indexPath Cell Index
-// */
-//func tableView(_ tableView: UITableView,
-//               didDeselectRowAt indexPath: IndexPath) {
-//    d("didDeselectRowAt() >> Start !!!")
-//}
-//
-///**
-// * 테이블 뷰 편집
-// *
-// * @param tableView UITableView
-// * @param editActionsForRowAt Cell Index
-// */
-//func tableView(_ tableView: UITableView,
-//               editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
-//    print("\(self.TAG) editActionsForRowAt() >> Start !!!")
-//
-//    let index = indexPath.row
-//    if index == 0 { return [] }
-//
-//    let cardBookItem = self.arrayCardBookItem[index]
-//
-//    // 이름
-//    let name = cardBookItem.name
-//    print("\(self.TAG) editActionsForRowAt() >> name: \(String(describing: name))")
-//
-//    let deleteAction = UITableViewRowAction(style: .destructive,
-//                                            title: "삭제") { action, index in
-//
-//                                                // 삭제 팝업
-//                                                self.popupDelete(cardBookItem: cardBookItem)
-//    }
-////        let moreAction = UITableViewRowAction(style: .normal,
-////                                              title: "더보기") { action, index in
-////
-////            // 더보기
-////            let title = name
-////            let message = "원하는 작업을 선택하세요."
-////            var contents = [String]()
-////            contents.append("명함 전달")
-////            contents.append("회사명함 등록")
-////            contents.append("만남이력 작성")
-////            contents.append("닫기")
-////
-////            DispatchQueue
-////                .main
-////                .async {
-////                    DialogUtil
-////                        .sharedInstance
-////                        .show(controller: self,
-////                              title: title,
-////                              message: message,
-////                              contents: contents,
-////                              completion:  {
-////                                selected in
-////                                print("\(self.TAG) editActionsForRowAt() >> completion: \(selected)")
-////                                if (selected == "명함전달") {
-////
-////                                } else if (selected == "회사명함 등록") {
-////
-////                                } else if (selected == "만남이력 작성") {
-////
-////                                }
-////                        })
-////            }
-////        }
-////        return [deleteAction, moreAction]
-//    return [deleteAction]
-//}
-

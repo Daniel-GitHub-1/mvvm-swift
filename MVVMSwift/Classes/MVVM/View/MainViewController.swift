@@ -5,19 +5,6 @@
 //  Created by Daniel on 2021/01/28.
 //
 
-import UIKit
-
-// RxSwift
-import RxCocoa
-import RxSwift
-import RxViewController
-
-// Communication
-import Alamofire
-
-// BottomSheet
-import MaterialComponents.MaterialBottomSheet
-
 protocol MainViewDelegate: NSObjectProtocol {
     
     /**
@@ -28,28 +15,20 @@ protocol MainViewDelegate: NSObjectProtocol {
     func MainViewDelegate(controller: MainViewController)
 }
 
-/**
- * MainViewController.swift
- *
- * @description 메인 뷰 컨트롤러
- * @author Daniel
- * @Constructor ZwooSoft
- * @version 1.0.0
- * @since 02/16/21 10:52 AM
- * @copyright Copyright © 2021 ZwooSoft All rights reserved.
- **/
 class MainViewController: BaseViewController {
     
     var delegate: MainViewDelegate? // 델리게이트
-    var viewModel = MainViewModel() // 뷰 모델
+    var mainViewModel = MainViewModel() // 메인 뷰 모델
 
-    @IBOutlet weak var btnWebView: UIButton?
-    @IBOutlet weak var btnTableView: UIButton?
-    @IBOutlet weak var btnDataCore: UIButton?
-    @IBOutlet weak var btnRealm: UIButton?
-    @IBOutlet weak var btnSendMessage: UIButton?
-    @IBOutlet weak var btnCameraGallery: UIButton?
-    @IBOutlet weak var btnSettings: UIButton?
+    @IBOutlet weak var btnWebView: UIButton! // 웹 뷰 이동 버튼
+    @IBOutlet weak var btnTableView: UIButton! // 테이블 뷰 이동 버튼
+    @IBOutlet weak var btnDataCore: UIButton! // 데이터 코어 뷰 이동 버튼
+    @IBOutlet weak var btnRealm: UIButton! // 렐름 뷰 이동 버튼
+    @IBOutlet weak var btnSendMessage: UIButton! // 메시지 전송 뷰 이동 버튼
+    @IBOutlet weak var btnCameraGallery: UIButton! // 카메라, 갤러리 뷰 이동 버튼
+    @IBOutlet weak var btnSettings: UIButton! // 설정 뷰 버튼
+    @IBOutlet weak var btnShortUrl: UIButton! // 단축 URL 버튼
+    @IBOutlet weak var btnChart: UIButton! // 챠트 버튼
 
     // MARK: - UIViewController Life Cycle
     
@@ -57,28 +36,8 @@ class MainViewController: BaseViewController {
         super.viewDidLoad()
         d("viewDidLoad() >> Start !!!")
         
-        // 뷰 컨트롤러 초기화
-        self.initViewController(self,
-                                navTitle: getString("Main"),
-                                tag: getString("[Main]"))
-        
-        // 뒤로가기 버튼
-        self.addBackButton()
-        
-        // 닫기 버튼
-        let image = UIImage(named: "SettingsBlack") ?? UIImage()
-        self.addRightButton(image)
-        
-        // 버튼 라운드 설정
-        if let color = "#3766F2".hexString2UIColor() {
-            btnWebView?.addRound(8, color: color, width: 0.1)
-            btnTableView?.addRound(8, color: color, width: 0.1)
-            btnDataCore?.addRound(8, color: color, width: 0.1)
-            btnRealm?.addRound(8, color: color, width: 0.1)
-            btnSendMessage?.addRound(8, color: color, width: 0.1)
-            btnCameraGallery?.addRound(8, color: color, width: 0.1)
-            btnSettings?.addRound(8, color: color, width: 0.1)
-        }
+        // 뷰 초기화
+        initView()
 
         // Version
 //        var parameters: Parameters = Parameters.init()
@@ -138,8 +97,8 @@ class MainViewController: BaseViewController {
         d("viewWillAppear() >> Start !!!")
         super.viewWillAppear(animated)
         
-        // 네비게이션바
-        setUpNavigationBar("", barTintColor: .white)
+        // 네비게이션바 설정
+        self.setUpNavigationBar("#FFFFFF")
     }
     
     // MARK: - Action
@@ -147,6 +106,7 @@ class MainViewController: BaseViewController {
     override func actionRightButton(_ sender: UIButton) {
         d("actionRightButton() >> Start !!!")
         
+        // 설정 뷰 컨트롤러 이동
         self.gotoViewController(name: Define.SB_NAME_MAIN,
                                 withIdentifier: Define.VC_NAME_SETTINGSVIEW,
                                 of: SettingsViewController(),
@@ -164,7 +124,12 @@ class MainViewController: BaseViewController {
     @IBAction func actionWebView(sender: UIButton) {
         d("actionWebView() >> Start !!!")
         
-        gotoWebViewController()
+        // 웹 뷰 컨트롤러 이동
+        gotoViewController(identifier: Define.VC_NAME_WEBVIEW, animated: true) { (viewController) in
+            self.d("actionWebView() >> viewController: \(viewController)")
+        }
+        
+//        gotoPopOverAniLoadingViewController()
     }
     
     /**
@@ -175,7 +140,10 @@ class MainViewController: BaseViewController {
     @IBAction func actionTableView(sender: UIButton) {
         d("actionTableView() >> Start !!!")
         
-        gotoTableViewController()
+        // 테이블 뷰 컨드롤러 이동
+        gotoViewController(identifier: Define.VC_NAME_TABLEVIEW, animated: true) { (viewController) in
+            self.d("actionTableView() >> viewController: \(viewController)")
+        }
     }
     
     /**
@@ -185,8 +153,11 @@ class MainViewController: BaseViewController {
      */
     @IBAction func actionSettingsView(sender: UIButton) {
         d("actionSettingsView() >> Start !!!")
-        
-        gotoSettingsViewController()
+       
+        // 설정 뷰 컨트롤러 이동
+        gotoViewController(identifier: Define.VC_NAME_SETTINGSVIEW, animated: true) { (viewController) in
+            self.d("actionSettingsView() >> viewController: \(viewController)")
+        }
     }
     
     /**
@@ -197,7 +168,10 @@ class MainViewController: BaseViewController {
     @IBAction func actionCoreDataView(sender: UIButton) {
         d("actionCoreDataView() >> Start !!!")
         
-        gotoCoreDataViewController()
+        // 코어 데이터 뷰 컨트롤러 이동
+        gotoViewController(identifier: Define.VC_NAME_COREDATAVIEW, animated: true) { (viewController) in
+            self.d("gotoViewController() >> viewController: \(viewController)")
+        }
     }
     
     /**
@@ -208,7 +182,10 @@ class MainViewController: BaseViewController {
     @IBAction func actionRealmView(sender: UIButton) {
         d("actionRealmView() >> Start !!!")
         
-        gotoRealmViewController()
+        // 렐름 뷰 컨드롤러 이동
+        gotoViewController(identifier: Define.VC_NAME_REALMVIEW, animated: true) { (viewController) in
+            self.d("gotoViewController() >> viewController: \(viewController)")
+        }
     }
     
     /**
@@ -218,14 +195,11 @@ class MainViewController: BaseViewController {
      */
     @IBAction func actionPopupSendMessage(sender: UIButton) {
         d("actionPopupSendMessage() >> Start !!!")
-        
-        // Short URL
-//        URLShortener.sharedInstance.getUrl(url: "http://crecolto.com/") { (result, shortUrl) in
-//            self.d("actionPopupSendMessage() >> shortUrl: \(shortUrl)")
-//        }
-        
+
         // 메시지 보내기 뷰 컨틀롤러 이동
-        gotoMessageViewController()
+        gotoViewController(identifier: Define.VC_NAME_MESSAGEVIEW, animated: true) { (viewController) in
+            self.d("gotoViewController() >> viewController: \(viewController)")
+        }
     }
     
     /**
@@ -236,136 +210,72 @@ class MainViewController: BaseViewController {
     @IBAction func actionPopupSelect(sender: UIButton) {
         d("actionPopupSelect() >> Start !!!")
         
-        gotoCameraViewController()
-    }
-    
-    // MARK: - Move ViewController
-    
-    /**
-     * 웹 뷰 컨틀롤러 이동
-     *
-     */
-    func gotoWebViewController() {
-        d("gotoWebViewController() >> Start !!!")
-        DispatchQueue
-            .main
-            .async {
-                guard let webView = self.storyboard?.instantiateViewController(withIdentifier: Define.VC_NAME_WEBVIEW) else {
-                    return
-                }
-                self.navigationController?.pushViewController(webView,
-                                                              animated: true)
-            }
-    }
-    
-    /**
-     * 테이블 뷰 컨틀롤러 이동
-     *
-     */
-    func gotoTableViewController() {
-        d("gotoTableViewController() >> Start !!!")
-        DispatchQueue
-            .main
-            .async {
-                guard let tableView = self.storyboard?.instantiateViewController(withIdentifier: Define.VC_NAME_TABLEVIEW) else {
-                    return
-                }
-                self.navigationController?.pushViewController(tableView,
-                                                              animated: true)
-            }
-    }
-    
-    /**
-     * 설정 뷰 컨틀롤러 이동
-     *
-     */
-    func gotoSettingsViewController() {
-        d("gotoSettingsViewController() >> Start !!!")
-        DispatchQueue
-            .main
-            .async {
-                guard let settingView = self.storyboard?.instantiateViewController(withIdentifier: Define.VC_NAME_SETTINGSVIEW) else {
-                    return
-                }
-                self.navigationController?.pushViewController(settingView,
-                                                              animated: true)
-            }
-    }
-    
-    /**
-     * 코어 데이터 뷰 컨틀롤러 이동
-     *
-     */
-    func gotoCoreDataViewController() {
-        d("gotoCoreDataViewController() >> Start !!!")
-        
-        DispatchQueue.main.async {
-            if let coreDataViewController = UIStoryboard(name: Define.SB_NAME_MAIN,
-                                                     bundle: nil).instantiateViewController(withIdentifier: Define.VC_NAME_COREDATAVIEW) as? CoreDataViewController {
-                self.d("gotoCoreDataViewController() >> coreDataViewController: \(coreDataViewController)")
-                
-                if let navigationController = self.navigationController {
-                    self.d("gotoCoreDataViewController() >> navigationController: \(navigationController)")
-                    navigationController.pushViewController(coreDataViewController,
-                                                            animated: true)
-                }
-            }
+        // 카메라 뷰 컨드롤러 이동
+        gotoViewController(identifier: Define.VC_NAME_CAMERAVIEW, animated: true) { (viewController) in
+            self.d("gotoViewController() >> viewController: \(viewController)")
         }
     }
     
     /**
-     * 렐름 뷰 컨틀롤러 이동
+     *  단축 URL 생성 버튼
      *
+     * @param sender UIButton
      */
-    func gotoRealmViewController() {
-        d("gotoRealmViewController() >> Start !!!")
-        
-        DispatchQueue.main.async {
-            if let realmViewController = UIStoryboard(name: Define.SB_NAME_MAIN,
-                                                     bundle: nil).instantiateViewController(withIdentifier: Define.VC_NAME_REALMVIEW) as? RealmViewController {
-                self.d("gotoRealmViewController() >> realmViewController: \(realmViewController)")
-                
-                if let navigationController = self.navigationController {
-                    self.d("gotoRealmViewController() >> navigationController: \(navigationController)")
-                    navigationController.pushViewController(realmViewController,
-                                                            animated: true)
-                }
-            }
+    @IBAction func actionShortenUrl(sender: UIButton) {
+        d("actionShortenUrl() >> Start !!!")
+
+        mainViewModel.getUrl("http://crecolto.com/") { (result, shortUrl) in
+            self.d("actionShortenUrl() >> shortUrl: \(shortUrl)")
         }
     }
     
     /**
-     * 메시지 보내기 뷰 컨틀롤러 이동
+     *  챠트 버튼
      *
+     * @param sender UIButton
      */
-    func gotoMessageViewController() {
-        d("gotoMessageViewController() >> Start !!!")
-        DispatchQueue
-            .main
-            .async {
-                guard let messageView = self.storyboard?.instantiateViewController(withIdentifier: Define.VC_NAME_MESSAGEVIEW) else {
-                    return
-                }
-                self.navigationController?.pushViewController(messageView,
-                                                              animated: true)
-            }
+    @IBAction func actionChart(sender: UIButton) {
+        d("actionChart() >> Start !!!")
+
+        // 챠트 뷰 컨드롤러 이동
+        gotoViewController(identifier: Define.VC_NAME_CHARTVIEW, animated: true) { (viewController) in
+            self.d("gotoViewController() >> viewController: \(viewController)")
+        }
     }
     
+    
+    // MARK: - Function
+    
     /**
-     * 카메라 뷰 컨틀롤러 이동
-     *
+     * 뷰 초기화
      */
-    func gotoCameraViewController() {
-        d("gotoCameraViewController() >> Start !!!")
-        DispatchQueue
-            .main
-            .async {
-                guard let cameraView = self.storyboard?.instantiateViewController(withIdentifier: Define.VC_NAME_CAMERAVIEW) else {
-                    return
-                }
-                self.navigationController?.pushViewController(cameraView,
-                                                              animated: true)
-            }
+    private func initView() {
+        // 뷰 컨트롤러 초기화
+        self.initViewController(self,
+                                navTitle: "",
+                                tag:"[\(getString("Main"))]")
+        
+        // 뒤로가기 버튼
+        self.addBackButton()
+        
+        // 닫기 버튼
+        let image = UIImage(named: "SettingsBlack") ?? UIImage()
+        self.addRightButton(image)
+        
+        // 버튼 라운드 설정
+        if let color = "#3766F2".hexString2UIColor() {
+            d("initView() >> color: \(color)")
+            
+            btnWebView.addRound(8, color: color, width: 0.1)
+            btnTableView.addRound(8, color: color, width: 0.1)
+            btnDataCore.addRound(8, color: color, width: 0.1)
+            btnRealm.addRound(8, color: color, width: 0.1)
+            btnSendMessage.addRound(8, color: color, width: 0.1)
+            btnCameraGallery.addRound(8, color: color, width: 0.1)
+            btnSettings.addRound(8, color: color, width: 0.1)
+            btnShortUrl.addRound(8, color: color, width: 0.1)
+            btnChart.addRound(8, color: color, width: 0.1)
+        }
     }
 }
 

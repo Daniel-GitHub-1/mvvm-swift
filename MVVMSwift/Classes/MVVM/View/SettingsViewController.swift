@@ -46,12 +46,12 @@ class SettingsViewController: BaseViewController {
         d("viewDidLoad() >> Start !!!")
         
         // 뷰 컨트롤러 초기화
-        initViewController(self,
-                           navTitle: getString("Settings"),
-                           tag: getString("[Settings]"))
+        self.initViewController(self,
+                                navTitle: getString("Settings"),
+                                tag:"[\(getString("Settings"))]")
         
         // 설정 리스트
-        for i in 0..<10 {
+        for i in 0..<3 {
             switch(i) {
             case 0:
                 self.arraySettings.append("계정")
@@ -75,14 +75,14 @@ class SettingsViewController: BaseViewController {
         d("viewWillAppear() >> Start !!!")
         super.viewWillAppear(animated)
         
-        // 네비게이션바
-        setUpNavigationBar(getString("Settings"))
+        // 네비게이션바 설정
+        self.setUpNavigationBar("#3766F2")
     }
 }
 
-// MARK: - UITableView
+// MARK: - UITableView DataSource
 
-extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
+extension SettingsViewController: UITableViewDataSource {
     
     /**
      * 테이블 뷰 아이템 개수
@@ -142,6 +142,12 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
         
         return cell
     }
+    
+}
+
+// MARK: - UITableView Delegate
+
+extension SettingsViewController:  UITableViewDelegate {
     
     // MARK: - UITableViewDelegate
     

@@ -19,21 +19,21 @@ class CoreDataViewModel: BaseViewModel {
     /**
      * 사용자 리스트
      *
-     * @return onResult (Bool, [Users])
+     * @return completion (Bool, [Users])
      */
-    func getAllUsers(onResult: @escaping (Bool, [Users]) -> ()) {
+    func getAllUsers(completion: @escaping (Bool, [Users]) -> ()) {
         let users: [Users] = CoreDataManager.sharedInstance.getUsers()
-        onResult(true, users)
+        completion(true, users)
     }
     
     /**
      * 사용자 추가
      *
      * @param dictionary NSDictionary
-     * @return onResult (Bool, String)
+     * @return completion (Bool, String)
      */
     func setUser(_ dictionary: [String : Any],
-                 onResult: @escaping (Bool, String) -> ()) {
+                 completion: @escaping (Bool, String) -> ()) {
         
         CoreDataManager.sharedInstance.setUser(id: Int64(getAutoIncremenet()),
                                                name: dictionary[Key.NAME] as? String ?? "",
@@ -41,7 +41,7 @@ class CoreDataViewModel: BaseViewModel {
                                                hp: dictionary[Key.HP] as? String ?? "",
                                                devices: dictionary[Key.DEVICES] as? [String] ?? []) { (success) in
             self.d("setUser() >> success: \((success))")
-            onResult(success, "")
+            completion(success, "")
         }
     }
     
@@ -49,14 +49,14 @@ class CoreDataViewModel: BaseViewModel {
      * 사용자 삭제
      *
      * @param id 아이디
-     * @return onResult (Bool, String)
+     * @return completion (Bool, String)
      */
     func deleteUser(_ id: Int64,
-                    onResult: @escaping (Bool, String) -> ()) {
+                    completion: @escaping (Bool, String) -> ()) {
         CoreDataManager.sharedInstance.deleteUser(id: id) { success in
             self.d("deleteUser() >> success: \((success))")
             
-            onResult(success, "")
+            completion(success, "")
         }
     }
     

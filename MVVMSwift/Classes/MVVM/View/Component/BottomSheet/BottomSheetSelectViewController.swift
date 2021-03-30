@@ -45,9 +45,12 @@ class BottomSheetSelectViewController: BaseViewController {
     
     override func viewDidLoad() {
         d("viewDidLoad() >> Start !!!")
-        d("viewDidLoad() >> width: \(self.view.frame.width)")
-        d("viewDidLoad() >> height: \(self.view.frame.height)")
         super.viewDidLoad()
+        
+        // 뷰 컨트롤러 초기화
+        self.initViewController(self,
+                                navTitle: "",
+                                tag: "[BottomSheetSelectView]")
         
         // 메인
         self.vwMain?.addRoundCorners(50, corners: [.layerMaxXMinYCorner])

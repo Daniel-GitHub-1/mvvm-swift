@@ -7,7 +7,7 @@
 //
 
 class LoginService: BaseService {
-    private let loginUrl = Url.getUrl("/biz_login") // Login API URL
+    private let loginUrl = Url.getApiUrl("/biz_login") // Login API URL
     
     /**
      * 초기화

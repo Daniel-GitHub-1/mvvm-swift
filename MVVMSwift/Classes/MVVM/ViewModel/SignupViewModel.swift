@@ -71,22 +71,22 @@ class SignupViewModel: BaseViewModel {
      *
      * @param viewController UIViewController
      * @param parameters 파라미터
-     * @returns onResult(Bool, Default, GetFailureReason)
+     * @returns completion(Bool, Default, GetFailureReason)
      */
     func getDuplicateCheckId(_ viewController: UIViewController,
                              parameters: Parameters,
-                             onResult: @escaping (Bool, Default, GetFailureReason) -> ()) {
+                             completion: @escaping (Bool, Default, GetFailureReason) -> ()) {
         self.d("getDuplicateCheckId() >> parameters: \(parameters)")
         
         signupService
             .getDuplicateCheckId(parameters)
             .subscribe(
                 onNext: { result in
-                    onResult(true, result, GetFailureReason.NONE)
+                    completion(true, result, GetFailureReason.NONE)
                     self.d("getDuplicateCheckId() >> result: \(result)")
                 },
                 onError: { error in
-                    onResult(false, Default.init(),
+                    completion(false, Default.init(),
                              error as? GetFailureReason ?? GetFailureReason.NONE)
                     self.d("getDuplicateCheckId() >> error: \(error)")
                 }

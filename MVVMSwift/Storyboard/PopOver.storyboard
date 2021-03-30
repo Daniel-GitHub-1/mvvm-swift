@@ -32,7 +32,25 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vfJ-dk-yMm" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-471" y="51"/>
+            <point key="canvasLocation" x="-4888" y="-2928"/>
+        </scene>
+        <!--Pop Over Ani Loading View Controller-->
+        <scene sceneID="dij-xi-U2m">
+            <objects>
+                <viewController storyboardIdentifier="PopOverAniLoadingView" id="O0M-9b-eIZ" customClass="PopOverAniLoadingViewController" customModule="MVVMSwift" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="center" id="UrP-Zw-lRQ">
+                        <rect key="frame" x="0.0" y="0.0" width="120" height="120"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="cZG-bw-mIo"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </view>
+                    <value key="contentSizeForViewInPopover" type="size" width="500" height="400"/>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="120" height="120"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="3K3-h7-QxA" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-4688.4333821376276" y="-2914.453125"/>
         </scene>
     </scenes>
     <resources>
